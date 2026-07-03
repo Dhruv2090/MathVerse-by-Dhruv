@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSIR NET Mathematics — Prep Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --bg:#0F0F1A;--bg2:#161625;--bg3:#1E1E30;--bg4:#252538;
+  --ink:#E8E6F0;--ink2:#B8B5CC;--ink3:#7A788C;
+  --accent:#6C63FF;--accent-soft:#3D3980;
+  --red:#E05C6A;--red-soft:#3D1E22;
+  --green:#4CAF82;--green-soft:#1B3028;
+  --gold:#D4A843;--gold-soft:#3A2E10;
+  --blue:#4A9EDE;--blue-soft:#1A2D42;
+  --border:#2A2A40;--border2:#353550;
+  --card:#1A1A2E;--card2:#20203A;
+  --radius:8px;
+  font-size:15px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.65;overflow-x:hidden;}
+h1,h2,h3,h4,.serif{font-family:'Newsreader',serif;}
+.mono{font-family:'JetBrains Mono',monospace;}
+a{color:var(--accent);text-decoration:none;}
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* ===== LAYOUT ===== */
+#app{display:flex;min-height:100vh;}
+#sidebar{width:270px;min-width:270px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;transition:transform .25s ease;}
+#sidebar.collapsed{transform:translateX(-270px);}
+#main{margin-left:270px;flex:1;display:flex;flex-direction:column;min-height:100vh;transition:margin-left .25s ease;}
+#main.full{margin-left:0;}
+
+/* ===== TOPBAR ===== */
+#topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.topbar-left{display:flex;align-items:center;gap:12px;}
+#menu-btn{background:none;border:1px solid var(--border2);color:var(--ink2);border-radius:6px;width:34px;height:34px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;}
+#breadcrumb{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink3);}
+.topbar-right{display:flex;align-items:center;gap:8px;}
+#search-box{background:var(--bg3);border:1px solid var(--border2);color:var(--ink);border-radius:20px;padding:6px 14px 6px 34px;font-size:.82rem;width:200px;outline:none;position:relative;}
+.search-wrap{position:relative;}
+.search-wrap::before{content:"🔍";position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.8rem;pointer-events:none;}
+#search-box:focus{border-color:var(--accent);width:260px;transition:width .2s;}
+.topbar-btn{background:none;border:1px solid var(--border2);color:var(--ink2);border-radius:6px;padding:6px 12px;font-size:.78rem;cursor:pointer;white-space:nowrap;}
+.topbar-btn:hover{border-color:var(--accent);color:var(--accent);}
+#back-btn{display:none;}
+#theme-btn{font-size:16px;}
+
+/* ===== SIDEBAR ===== */
+.sb-header{padding:18px 20px 14px;border-bottom:1px solid var(--border);}
+.sb-logo{font-family:'Newsreader',serif;font-size:1.2rem;font-weight:600;color:var(--ink);line-height:1.2;}
+.sb-logo small{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-top:3px;}
+.sb-body{flex:1;overflow-y:auto;padding:10px 0 20px;}
+.sb-section{padding:8px 14px 4px;}
+.sb-section-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);padding:6px 6px 4px;border-bottom:1px solid var(--border);}
+.sb-topic{display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-radius:6px;cursor:pointer;font-size:.85rem;color:var(--ink2);transition:background .12s;}
+.sb-topic:hover{background:var(--bg3);color:var(--ink);}
+.sb-topic.active{background:var(--accent-soft);color:var(--ink);}
+.sb-topic .topic-name{flex:1;}
+.stars{font-size:.65rem;letter-spacing:.02em;color:var(--gold);}
+.sb-unit{display:flex;align-items:center;gap:6px;padding:5px 8px 5px 18px;border-radius:4px;cursor:pointer;font-size:.78rem;color:var(--ink3);transition:background .12s;}
+.sb-unit:hover{background:var(--bg3);color:var(--ink2);}
+.sb-unit.active{color:var(--accent);}
+.sb-unit::before{content:"";width:4px;height:4px;border-radius:50%;background:currentColor;flex:none;}
+.sb-progress-bar{height:2px;background:var(--border2);margin:2px 8px 6px;border-radius:2px;overflow:hidden;}
+.sb-progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .3s;}
+.sb-footer{padding:12px 20px;border-top:1px solid var(--border);display:flex;gap:8px;}
+.sb-footer-btn{flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--ink2);border-radius:6px;padding:7px;font-size:.75rem;cursor:pointer;text-align:center;}
+.sb-footer-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ===== CONTENT AREA ===== */
+#content{padding:32px 48px 80px;max-width:1000px;}
+@media(max-width:900px){#content{padding:24px 20px 60px;}}
+
+/* ===== HOME ===== */
+.home-hero{padding:48px 0 36px;}
+.home-hero .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.home-hero h1{font-size:2.4rem;font-weight:600;line-height:1.15;max-width:18ch;margin-bottom:14px;color:var(--ink);}
+.home-hero p{font-size:1rem;color:var(--ink2);max-width:58ch;margin-bottom:28px;}
+.stats-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:36px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 20px;min-width:120px;}
+.stat-card .num{font-size:1.8rem;font-weight:700;color:var(--accent);font-family:'JetBrains Mono',monospace;}
+.stat-card .lbl{font-size:.72rem;color:var(--ink3);margin-top:2px;}
+.section-head{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:32px;}
+.topic-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;cursor:pointer;transition:border-color .15s,transform .15s;}
+.topic-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.topic-card .tc-stars{font-size:.7rem;margin-bottom:8px;}
+.topic-card h3{font-size:1rem;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.topic-card p{font-size:.78rem;color:var(--ink3);margin-bottom:10px;line-height:1.5;}
+.tc-meta{display:flex;justify-content:space-between;align-items:center;}
+.tc-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:3px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em;}
+.tc-badge.high{background:var(--red-soft);color:var(--red);}
+.tc-badge.med{background:var(--gold-soft);color:var(--gold);}
+.tc-badge.low{background:var(--bg3);color:var(--ink3);}
+.tc-units{font-size:.72rem;color:var(--ink3);}
+
+/* ===== TOPIC PAGE ===== */
+.topic-header{padding-bottom:28px;border-bottom:1px solid var(--border);margin-bottom:28px;}
+.topic-header h1{font-size:2rem;font-weight:600;margin:10px 0 8px;}
+.topic-header .sub{color:var(--ink2);font-size:.95rem;max-width:65ch;margin-bottom:16px;}
+.meta-chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:4px 10px;border-radius:20px;border:1px solid var(--border2);color:var(--ink3);}
+.chip.red{border-color:var(--red);color:var(--red);}
+.chip.gold{border-color:var(--gold);color:var(--gold);}
+.chip.green{border-color:var(--green);color:var(--green);}
+
+/* Quick nav tabs */
+.unit-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:20px 0 32px;position:sticky;top:56px;background:var(--bg);padding:10px 0;z-index:20;border-bottom:1px solid var(--border);}
+.unit-tab{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:6px 12px;border:1px solid var(--border2);border-radius:20px;cursor:pointer;color:var(--ink3);background:var(--bg2);transition:all .12s;white-space:nowrap;}
+.unit-tab:hover{border-color:var(--accent);color:var(--accent);}
+.unit-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* ===== UNIT BLOCK ===== */
+.unit-block{margin-bottom:60px;scroll-margin-top:120px;}
+.unit-title{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--accent-soft);}
+.unit-num{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:4px;}
+.unit-title h2{font-size:1.5rem;font-weight:600;}
+
+/* Section blocks inside unit */
+.section-block{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;}
+.section-header{display:flex;align-items:center;gap:10px;padding:13px 18px;cursor:pointer;border-bottom:1px solid var(--border);background:var(--card2);user-select:none;}
+.section-icon{font-size:1.1rem;flex:none;}
+.section-header h4{font-size:.92rem;font-weight:600;color:var(--ink);flex:1;}
+.section-toggle{color:var(--ink3);font-size:.8rem;transition:transform .2s;}
+.section-toggle.open{transform:rotate(180deg);}
+.section-body{padding:18px;display:none;line-height:1.75;}
+.section-body.open{display:block;}
+
+/* Concept summary */
+.concept-text{font-size:.93rem;color:var(--ink2);}
+.concept-text p{margin-bottom:12px;}
+
+/* Definitions */
+.def-list{list-style:none;}
+.def-item{padding:10px 0;border-bottom:1px solid var(--border);}
+.def-item:last-child{border-bottom:none;}
+.def-term{font-weight:600;color:var(--ink);margin-bottom:4px;font-size:.92rem;}
+.def-body{font-size:.88rem;color:var(--ink2);}
+
+/* Theorems */
+.theorem-box{border:1px solid var(--blue);border-radius:6px;padding:14px 18px;margin-bottom:12px;background:var(--blue-soft);}
+.theorem-box .thm-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.theorem-box .thm-name{font-weight:600;font-size:.94rem;color:var(--ink);margin-bottom:6px;}
+.theorem-box .thm-body{font-size:.88rem;color:var(--ink2);}
+.proof-toggle{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);cursor:pointer;margin-top:8px;display:inline-block;}
+.proof-box{margin-top:10px;padding:10px 14px;background:var(--bg3);border-radius:4px;font-size:.86rem;color:var(--ink2);display:none;}
+.proof-box.open{display:block;}
+
+/* Formula sheet */
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;}
+.formula-item{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:12px 14px;}
+.formula-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--ink3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em;}
+.formula-math{font-size:.94rem;overflow-x:auto;}
+
+/* Tricks */
+.trick-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.trick-item:last-child{border-bottom:none;}
+.trick-icon{font-size:1.2rem;flex:none;}
+.trick-body{font-size:.89rem;color:var(--ink2);}
+
+/* Mistakes */
+.mistake-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);}
+.mistake-item:last-child{border-bottom:none;}
+.mistake-wrong{color:var(--red);font-size:.84rem;margin-bottom:4px;}
+.mistake-right{color:var(--green);font-size:.84rem;}
+.mx-icon{font-size:1.1rem;flex:none;}
+
+/* PYQ */
+.pyq-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.pyq-filter{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:4px 10px;border:1px solid var(--border2);border-radius:20px;cursor:pointer;color:var(--ink3);}
+.pyq-filter.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.pyq-filter:hover{border-color:var(--accent);color:var(--accent);}
+
+/* Problem card */
+.problem-card{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;}
+.problem-head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--bg3);}
+.p-meta{display:flex;gap:8px;align-items:center;}
+.p-tag{font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:2px 7px;border-radius:3px;}
+.p-tag.year{background:var(--blue-soft);color:var(--blue);}
+.p-tag.part{background:var(--gold-soft);color:var(--gold);}
+.p-tag.diff{background:var(--green-soft);color:var(--green);}
+.p-tag.diff.hard{background:var(--red-soft);color:var(--red);}
+.bookmark-btn{background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--ink3);padding:0;}
+.bookmark-btn.active{color:var(--gold);}
+.problem-body{padding:14px 16px;}
+.problem-q{font-size:.93rem;color:var(--ink);margin-bottom:8px;line-height:1.7;}
+.solution-toggle{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);cursor:pointer;user-select:none;}
+.solution-body{margin-top:12px;padding:14px;background:var(--bg);border-radius:6px;display:none;border:1px solid var(--border);}
+.solution-body.open{display:block;}
+.sol-step{font-size:.9rem;color:var(--ink2);margin-bottom:10px;padding-left:16px;position:relative;}
+.sol-step::before{content:"→";position:absolute;left:0;color:var(--accent);}
+.sol-final{font-weight:600;color:var(--green);font-size:.9rem;margin-top:8px;padding:8px 12px;background:var(--green-soft);border-radius:4px;}
+
+/* One minute revision */
+.revision-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;}
+.rev-card{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:12px 14px;}
+.rev-card .rev-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink3);margin-bottom:6px;text-transform:uppercase;}
+.rev-card .rev-text{font-size:.85rem;color:var(--ink2);}
+
+/* Expected */
+.expected-list{list-style:none;}
+.expected-list li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ink2);}
+.expected-list li:last-child{border-bottom:none;}
+.expected-list li::before{content:"🎯";flex:none;}
+
+/* Flashcards */
+#flashcard-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:24px;}
+.flashcard{perspective:600px;}
+.fc-inner{position:relative;min-height:160px;cursor:pointer;transform-style:preserve-3d;transition:transform .4s;}
+.fc-inner.flipped{transform:rotateY(180deg);}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:20px;border-radius:8px;background:var(--bg3);border:1px solid var(--border2);}
+.fc-back{transform:rotateY(180deg);background:var(--accent-soft);border-color:var(--accent);}
+.fc-text{font-size:.97rem;color:var(--ink);}
+.fc-controls{display:flex;justify-content:center;gap:12px;margin-top:16px;}
+.fc-btn{background:var(--bg3);border:1px solid var(--border2);color:var(--ink2);padding:8px 18px;border-radius:6px;cursor:pointer;font-size:.82rem;}
+.fc-btn:hover{border-color:var(--accent);color:var(--accent);}
+.fc-count{font-size:.78rem;color:var(--ink3);margin-top:8px;}
+
+/* Progress tracker */
+#progress-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
+.prog-topic{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);}
+.prog-topic:last-child{border-bottom:none;}
+.prog-name{flex:1;font-size:.87rem;color:var(--ink2);}
+.prog-bar-wrap{width:100px;height:6px;background:var(--border2);border-radius:3px;}
+.prog-bar-fill{height:100%;border-radius:3px;background:var(--accent);}
+.prog-pct{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink3);width:32px;text-align:right;}
+.prog-check{font-size:.9rem;}
+
+/* Study plan */
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;}
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:12px 14px;}
+.day-card .day-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);margin-bottom:6px;}
+.day-card .day-topic{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:4px;}
+.day-card .day-units{font-size:.78rem;color:var(--ink3);}
+
+/* Mock test */
+.mock-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.mock-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;cursor:pointer;transition:border-color .15s;}
+.mock-card:hover{border-color:var(--accent);}
+.mock-icon{font-size:2rem;margin-bottom:10px;}
+.mock-card h3{font-size:.97rem;font-weight:600;margin-bottom:6px;}
+.mock-card p{font-size:.78rem;color:var(--ink3);}
+.start-btn{display:block;margin-top:14px;background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px;text-align:center;font-size:.8rem;cursor:pointer;width:100%;}
+
+/* Formula handbook */
+.handbook-topic{margin-bottom:32px;}
+.handbook-topic h3{font-size:1.1rem;font-weight:600;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+
+/* Weightage tracker */
+.wt-table{width:100%;border-collapse:collapse;}
+.wt-table th{font-family:'JetBrains Mono',monospace;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;}
+.wt-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:.88rem;color:var(--ink2);}
+.wt-table tr:hover td{background:var(--bg3);}
+.wt-bar{height:6px;border-radius:3px;background:var(--accent);}
+
+/* Search results */
+#search-results{display:none;position:absolute;top:calc(100% + 8px);right:0;width:320px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);z-index:200;max-height:320px;overflow-y:auto;}
+.sr-item{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);}
+.sr-item:last-child{border-bottom:none;}
+.sr-item:hover{background:var(--bg3);}
+.sr-item .sr-topic{font-size:.72rem;color:var(--accent);margin-bottom:3px;font-family:'JetBrains Mono',monospace;}
+.sr-item .sr-title{font-size:.88rem;color:var(--ink);}
+
+/* Utility */
+.hidden{display:none!important;}
+.page{display:none;}
+.page.active{display:block;}
+.badge-high{color:var(--red);}
+.badge-med{color:var(--gold);}
+.badge-low{color:var(--ink3);}
+
+/* Light mode */
+body.light{
+  --bg:#F5F4F0;--bg2:#ECEAE4;--bg3:#E0DED8;--bg4:#D4D2CC;
+  --ink:#1A1A2E;--ink2:#42405A;--ink3:#7A788C;
+  --card:#FFFFFF;--card2:#F0EEE8;
+  --border:#D0CEC8;--border2:#C0BEB8;
+  --accent-soft:#DDD8FF;--blue-soft:#DAEEFF;
+  --red-soft:#FFE5E8;--green-soft:#D8F5E8;--gold-soft:#FFF3D0;
+  --bg-alt:#F5F4F0;
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- ===== SIDEBAR ===== -->
+<nav id="sidebar">
+  <div class="sb-header">
+    <div class="sb-logo">CSIR NET Maths<small>Prep Hub 2025</small></div>
+  </div>
+  <div class="sb-body" id="sb-body"></div>
+  <div class="sb-footer">
+    <div class="sb-footer-btn" onclick="showPage('study-plan')">📅 Study Plan</div>
+    <div class="sb-footer-btn" onclick="showPage('progress')">📈 Progress</div>
+  </div>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<div id="main">
+  <div id="topbar">
+    <div class="topbar-left">
+      <button id="menu-btn" onclick="toggleSidebar()">☰</button>
+      <button class="topbar-btn" id="back-btn" onclick="goBack()">← Back</button>
+      <span id="breadcrumb">home</span>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrap" style="position:relative;">
+        <input type="text" id="search-box" placeholder="Search topics, theorems..." oninput="doSearch(this.value)">
+        <div id="search-results"></div>
+      </div>
+      <button class="topbar-btn" onclick="showPage('flashcards')">🧠 Flashcards</button>
+      <button class="topbar-btn" onclick="showPage('handbook')">📄 Formulas</button>
+      <button class="topbar-btn" onclick="showPage('mock-tests')">📝 Mock Tests</button>
+      <button class="topbar-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
+    </div>
+  </div>
+
+  <div id="content">
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="home-hero">
+        <div class="eyebrow">CSIR NET / GATE / SET Mathematics</div>
+        <h1 class="serif">Master Every Topic. Crack Every Paper.</h1>
+        <p>High-weightage topics ko priority se cover karo — unit-wise theory, PYQs, tricks aur practice problems with full solutions.</p>
+        <div class="stats-row">
+          <div class="stat-card"><div class="num">10</div><div class="lbl">Topics Covered</div></div>
+          <div class="stat-card"><div class="num">47</div><div class="lbl">Units</div></div>
+          <div class="stat-card"><div class="num">200+</div><div class="lbl">Solved Problems</div></div>
+          <div class="stat-card"><div class="num">150+</div><div class="lbl">PYQs</div></div>
+        </div>
+      </div>
+
+      <div class="section-head">⭐⭐⭐⭐⭐ Highest Weightage — Start Here</div>
+      <div class="topic-grid" id="grid-high"></div>
+      <div class="section-head">⭐⭐⭐⭐☆ High Weightage</div>
+      <div class="topic-grid" id="grid-med"></div>
+      <div class="section-head">⭐⭐⭐☆☆ Medium Weightage</div>
+      <div class="topic-grid" id="grid-mid"></div>
+      <div class="section-head">⭐⭐☆☆☆ Supplementary</div>
+      <div class="topic-grid" id="grid-low"></div>
+    </div>
+
+    <!-- TOPIC PAGES (injected dynamically) -->
+    <div id="topic-container"></div>
+
+    <!-- FLASHCARDS PAGE -->
+    <div class="page" id="page-flashcards">
+      <h1 class="serif" style="margin-bottom:8px;">🧠 Flashcards</h1>
+      <p style="color:var(--ink2);margin-bottom:24px;">Definitions aur theorems click karke flip karo — ek baar front, ek baar back.</p>
+      <div style="margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap;" id="fc-filter-bar"></div>
+      <div id="flashcard-section">
+        <div class="flashcard">
+          <div class="fc-inner" id="fc-inner" onclick="flipCard()">
+            <div class="fc-front"><div class="fc-text" id="fc-front-text">Loading...</div></div>
+            <div class="fc-back"><div class="fc-text" id="fc-back-text">Loading...</div></div>
+          </div>
+        </div>
+        <div class="fc-controls">
+          <button class="fc-btn" onclick="fcPrev()">← Prev</button>
+          <button class="fc-btn" onclick="flipCard()">Flip</button>
+          <button class="fc-btn" onclick="fcNext()">Next →</button>
+        </div>
+        <div class="fc-count" id="fc-count">0 / 0</div>
+      </div>
+    </div>
+
+    <!-- FORMULA HANDBOOK PAGE -->
+    <div class="page" id="page-handbook">
+      <h1 class="serif" style="margin-bottom:8px;">📄 Formula Handbook</h1>
+      <p style="color:var(--ink2);margin-bottom:24px;">Sabhi topics ke key formulas ek jagah — exam ke din quick revise karo.</p>
+      <div id="handbook-content"></div>
+    </div>
+
+    <!-- MOCK TESTS PAGE -->
+    <div class="page" id="page-mock-tests">
+      <h1 class="serif" style="margin-bottom:8px;">📝 Mock Tests</h1>
+      <p style="color:var(--ink2);margin-bottom:24px;">CSIR NET paper pattern ke anusaar practice karo — instant score aur solutions.</p>
+      <div class="mock-grid">
+        <div class="mock-card"><div class="mock-icon">📗</div><h3>Part A — Aptitude</h3><p>20 questions · 30 min · General aptitude</p><button class="start-btn" onclick="startMock('A')">Start Test</button></div>
+        <div class="mock-card"><div class="mock-icon">📘</div><h3>Part B — Core Maths</h3><p>40 questions · 75 min · All topics</p><button class="start-btn" onclick="startMock('B')">Start Test</button></div>
+        <div class="mock-card"><div class="mock-icon">📙</div><h3>Part C — Advanced</h3><p>60 questions · 2.5 hrs · High difficulty</p><button class="start-btn" onclick="startMock('C')">Start Test</button></div>
+        <div class="mock-card"><div class="mock-icon">📕</div><h3>Full Length Test</h3><p>120 questions · 3 hrs · Complete paper</p><button class="start-btn" onclick="startMock('Full')">Start Test</button></div>
+        <div class="mock-card"><div class="mock-icon">⚡</div><h3>Quick Drill</h3><p>20 questions · 20 min · Weak areas</p><button class="start-btn" onclick="startMock('Quick')">Start Test</button></div>
+        <div class="mock-card"><div class="mock-icon">🎯</div><h3>Topic Test</h3><p>15 questions · 15 min · Single topic</p><button class="start-btn" onclick="startMock('Topic')">Start Test</button></div>
+      </div>
+      <div id="mock-area" style="margin-top:32px;"></div>
+    </div>
+
+    <!-- WEIGHTAGE TRACKER -->
+    <div class="page" id="page-weightage">
+      <h1 class="serif" style="margin-bottom:8px;">📊 Weightage Tracker</h1>
+      <p style="color:var(--ink2);margin-bottom:24px;">Last 10 years (2014–2024) ka question count aur recommended study time.</p>
+      <table class="wt-table">
+        <thead><tr><th>Topic</th><th>Weightage</th><th>10-yr Qs</th><th>Study Hours</th><th>Priority</th></tr></thead>
+        <tbody id="wt-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- STUDY PLAN -->
+    <div class="page" id="page-study-plan">
+      <h1 class="serif" style="margin-bottom:8px;">📅 Study Plan</h1>
+      <p style="color:var(--ink2);margin-bottom:16px;">Choose your preparation timeline:</p>
+      <div style="display:flex;gap:10px;margin-bottom:24px;">
+        <button class="fc-btn" onclick="showPlan(45)">45 Days</button>
+        <button class="fc-btn" onclick="showPlan(60)">60 Days</button>
+        <button class="fc-btn" onclick="showPlan(90)">90 Days</button>
+      </div>
+      <div id="plan-content" class="plan-grid"></div>
+    </div>
+
+    <!-- PROGRESS PAGE -->
+    <div class="page" id="page-progress">
+      <h1 class="serif" style="margin-bottom:8px;">📈 Progress Tracker</h1>
+      <p style="color:var(--ink2);margin-bottom:24px;">Track karo — topics completed, accuracy, revision count.</p>
+      <div class="stats-row" style="margin-bottom:28px;">
+        <div class="stat-card"><div class="num" id="pg-completed">0</div><div class="lbl">Topics Completed</div></div>
+        <div class="stat-card"><div class="num" id="pg-solved">0</div><div class="lbl">Problems Solved</div></div>
+        <div class="stat-card"><div class="num" id="pg-accuracy">—</div><div class="lbl">Accuracy %</div></div>
+        <div class="stat-card"><div class="num" id="pg-bookmarks">0</div><div class="lbl">Bookmarks</div></div>
+      </div>
+      <div id="progress-panel"></div>
+    </div>
+
+    <!-- BOOKMARKS PAGE -->
+    <div class="page" id="page-bookmarks">
+      <h1 class="serif" style="margin-bottom:8px;">⭐ Bookmarks</h1>
+      <p style="color:var(--ink2);margin-bottom:24px;">Tumhare saved questions.</p>
+      <div id="bookmark-list"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+/* ============================================================
+   DATA
+============================================================ */
+const TOPICS = [
+  {id:"la", name:"Linear Algebra", weight:"5star", badge:"high", stars:"⭐⭐⭐⭐⭐", desc:"Vector spaces, transformations, eigen theory, canonical forms.", q10yr:52, hours:80,
+   units:[
+    {id:"la-vs", name:"Vector Spaces"},
+    {id:"la-lt", name:"Linear Transformations"},
+    {id:"la-mat", name:"Matrices"},
+    {id:"la-rn", name:"Rank–Nullity Theorem"},
+    {id:"la-ev", name:"Eigenvalues & Eigenvectors"},
+    {id:"la-diag", name:"Diagonalization"},
+    {id:"la-ips", name:"Inner Product Spaces"},
+    {id:"la-spec", name:"Spectral Theorem"},
+  ]},
+  {id:"ra", name:"Real Analysis", weight:"5star", badge:"high", stars:"⭐⭐⭐⭐⭐", desc:"Sequences, continuity, differentiation, Riemann integration, metric spaces.", q10yr:55, hours:90,
+   units:[
+    {id:"ra-seq", name:"Sequences & Series"},
+    {id:"ra-cont", name:"Continuity"},
+    {id:"ra-diff", name:"Differentiation"},
+    {id:"ra-rie", name:"Riemann Integration"},
+    {id:"ra-met", name:"Metric Spaces"},
+    {id:"ra-uc", name:"Uniform Convergence"},
+  ]},
+  {id:"ca", name:"Complex Analysis", weight:"4star", badge:"med", stars:"⭐⭐⭐⭐☆", desc:"Analytic functions, Cauchy theorem, residues, Laurent series.", q10yr:38, hours:60,
+   units:[
+    {id:"ca-an", name:"Analytic Functions & CR Equations"},
+    {id:"ca-ci", name:"Cauchy's Theorem & Integral Formula"},
+    {id:"ca-lau", name:"Laurent Series & Singularities"},
+    {id:"ca-res", name:"Residue Theorem & Applications"},
+    {id:"ca-cm", name:"Conformal Mapping"},
+  ]},
+  {id:"aa", name:"Abstract Algebra", weight:"4star", badge:"med", stars:"⭐⭐⭐⭐☆", desc:"Groups, rings, fields, homomorphisms, Sylow theorems.", q10yr:36, hours:60,
+   units:[
+    {id:"aa-grp", name:"Groups & Subgroups"},
+    {id:"aa-homo", name:"Homomorphisms & Quotient Groups"},
+    {id:"aa-syl", name:"Sylow Theorems"},
+    {id:"aa-ring", name:"Rings & Ideals"},
+    {id:"aa-field", name:"Fields & Extensions"},
+  ]},
+  {id:"de", name:"ODE & PDE", weight:"4star", badge:"med", stars:"⭐⭐⭐⭐☆", desc:"First/second order ODEs, systems, PDEs: wave, heat, Laplace.", q10yr:34, hours:55,
+   units:[
+    {id:"de-fo", name:"First Order ODEs"},
+    {id:"de-lcc", name:"Linear ODEs (Const. Coeff.)"},
+    {id:"de-ser", name:"Series Solutions & Frobenius"},
+    {id:"de-sl", name:"Sturm–Liouville Theory"},
+    {id:"de-pde", name:"PDEs: Classification & Methods"},
+  ]},
+  {id:"calc", name:"Calculus", weight:"3star", badge:"mid", stars:"⭐⭐⭐☆☆", desc:"Multivariable calculus, vector calculus, Green's & Stokes theorems.", q10yr:26, hours:40,
+   units:[
+    {id:"calc-pder", name:"Partial Derivatives & Extrema"},
+    {id:"calc-int", name:"Multiple Integrals"},
+    {id:"calc-vc", name:"Vector Calculus Theorems"},
+  ]},
+  {id:"top", name:"Topology", weight:"3star", badge:"mid", stars:"⭐⭐⭐☆☆", desc:"Open sets, continuity, compactness, connectedness, separation axioms.", q10yr:24, hours:40,
+   units:[
+    {id:"top-ts", name:"Topological Spaces & Basis"},
+    {id:"top-cont", name:"Continuity & Homeomorphism"},
+    {id:"top-comp", name:"Compactness"},
+    {id:"top-conn", name:"Connectedness & Separation Axioms"},
+  ]},
+  {id:"na", name:"Numerical Analysis", weight:"2star", badge:"low", stars:"⭐⭐☆☆☆", desc:"Root finding, interpolation, numerical integration & ODE solvers.", q10yr:16, hours:25,
+   units:[
+    {id:"na-root", name:"Root Finding Methods"},
+    {id:"na-int", name:"Interpolation"},
+    {id:"na-num", name:"Numerical Integration & ODEs"},
+  ]},
+  {id:"ie", name:"Integral Equations", weight:"2star", badge:"low", stars:"⭐⭐☆☆☆", desc:"Fredholm & Volterra integral equations, resolvent kernel.", q10yr:14, hours:20,
+   units:[
+    {id:"ie-fred", name:"Fredholm Integral Equations"},
+    {id:"ie-volt", name:"Volterra Integral Equations"},
+  ]},
+  {id:"cm", name:"Classical Mechanics", weight:"2star", badge:"low", stars:"⭐⭐☆☆☆", desc:"Lagrangian & Hamiltonian mechanics, central force, small oscillations.", q10yr:14, hours:20,
+   units:[
+    {id:"cm-lag", name:"Lagrangian Mechanics"},
+    {id:"cm-ham", name:"Hamiltonian Mechanics"},
+  ]},
+];
+
+/* ============================================================
+   CONTENT DATA
+============================================================ */
+const UNIT_CONTENT = {
+
+/* ====== LINEAR ALGEBRA ====== */
+"la-vs":{
+  concept:`<p>A <strong>vector space</strong> \(V\) over a field \(F\) is a non-empty set equipped with two operations — vector addition and scalar multiplication — satisfying 8 axioms (closure, associativity, commutativity, identity, inverses, distributivity).</p>
+<p>A <strong>subspace</strong> \(W \subseteq V\) is itself a vector space. The quickest test: \(W\) is a subspace iff it is non-empty, closed under addition and scalar multiplication.</p>
+<p><strong>Span</strong>: \(\text{span}(S)\) is the smallest subspace containing set \(S\). A set \(S\) is <strong>linearly independent</strong> if \(\sum c_i v_i = 0 \Rightarrow c_i = 0\ \forall i\).</p>
+<p>A <strong>basis</strong> is a linearly independent spanning set. All bases of a finite-dimensional space have the same size — the <strong>dimension</strong>.</p>`,
+  definitions:[
+    {term:"Vector Space", body:"A set \\(V\\) over field \\(F\\) with addition and scalar multiplication satisfying 8 axioms."},
+    {term:"Subspace", body:"A non-empty subset \\(W\\) of \\(V\\) closed under addition and scalar multiplication."},
+    {term:"Linear Independence", body:"\\(\\{v_1,\\ldots,v_n\\}\\) is linearly independent if \\(\\sum c_i v_i = 0 \\Rightarrow c_i = 0\\) for all \\(i\\)."},
+    {term:"Basis", body:"A linearly independent set that spans \\(V\\)."},
+    {term:"Dimension", body:"The number of vectors in any basis of \\(V\\), denoted \\(\\dim V\\)."},
+  ],
+  theorems:[
+    {name:"Dimension Formula (Subspaces)", body:"If \\(W_1, W_2\\) are subspaces of a finite-dimensional \\(V\\), then \\[\\dim(W_1+W_2)=\\dim W_1+\\dim W_2-\\dim(W_1\\cap W_2).\\]", proof:"Extend a basis of \\(W_1\\cap W_2\\) separately to bases of \\(W_1\\) and \\(W_2\\). Their union spans \\(W_1+W_2\\) and, after verifying independence, gives the count."},
+    {name:"Dimension of Quotient Space", body:"\\(\\dim(V/W) = \\dim V - \\dim W\\) for a subspace \\(W\\)."},
+  ],
+  formulas:[
+    {label:"Dimension Formula", math:"\\(\\dim(W_1+W_2)=\\dim W_1+\\dim W_2-\\dim(W_1\\cap W_2)\\)"},
+    {label:"Quotient Dimension", math:"\\(\\dim V/W = \\dim V - \\dim W\\)"},
+    {label:"Extension theorem", math:"Every L.I. set extends to a basis"},
+  ],
+  tricks:[
+    {text:"If \\(\\dim W_1 + \\dim W_2 > \\dim V\\), then \\(W_1 \\cap W_2 \\ne \\{0\\}\\) — great for disproving trivial intersections."},
+    {text:"To check subspace: only verify closure under + and \\(\\cdot\\); all other axioms are inherited from \\(V\\)."},
+    {text:"Complement subspace: if \\(W_1\\cap W_2=\\{0\\}\\) and \\(W_1+W_2=V\\), then \\(V=W_1\\oplus W_2\\)."},
+  ],
+  mistakes:[
+    {wrong:"Assuming every set of \\(\\dim V\\) vectors is a basis.",right:"You must also verify linear independence (or spanning) — one alone is NOT enough in an infinite-dimensional space."},
+    {wrong:"Span of the empty set is empty.",right:"\\(\\text{span}(\\emptyset) = \\{0\\}\\), the zero subspace."},
+  ],
+  pyqs:[
+    {year:"CSIR 2022",part:"Part B",diff:"Medium",q:"Let \\(W_1, W_2\\) be subspaces of \\(\\mathbb{R}^4\\) with \\(\\dim W_1=3,\\dim W_2=3\\). Then \\(\\dim(W_1\\cap W_2)\\) can be:",solution:[
+      "By dimension formula: \\(\\dim(W_1\\cap W_2) = 3+3-\\dim(W_1+W_2)\\).",
+      "\\(W_1+W_2 \\subseteq \\mathbb{R}^4\\), so \\(\\dim(W_1+W_2)\\le 4\\).",
+      "Also \\(\\dim(W_1+W_2)\\ge \\max(3,3)=3\\).",
+      "So \\(\\dim(W_1\\cap W_2) \\in \\{2,3\\}\\)."
+    ],answer:"2 or 3"},
+    {year:"CSIR 2019",part:"Part C",diff:"Hard",q:"If \\(V=\\mathbb{R}^5\\) and \\(\\dim W=3\\), what is \\(\\dim(V/W)\\)?",solution:[
+      "By the quotient dimension theorem: \\(\\dim(V/W)=\\dim V - \\dim W = 5-3 = 2\\)."
+    ],answer:"2"},
+  ],
+  practice:[
+    {diff:"Easy",q:"Show that the set \\(W=\\{(x,y,z)\\in\\mathbb{R}^3: x+y+z=0\\}\\) is a subspace. Find its dimension.",solution:[
+      "Closure under addition: \\((x_1+x_2)+(y_1+y_2)+(z_1+z_2)=(x_1+y_1+z_1)+(x_2+y_2+z_2)=0\\).",
+      "Closure under scalar mult: \\(k(x+y+z)=0\\).",
+      "Hence \\(W\\) is a subspace. \\(W\\) is the kernel of the map \\((x,y,z)\\mapsto x+y+z\\), so by Rank–Nullity, \\(\\dim W = 3-1=2\\)."
+    ],answer:"Subspace, dim = 2"},
+    {diff:"Medium",q:"Determine if \\(\\{(1,0,1),(0,1,1),(1,1,0)\\}\\) is a basis for \\(\\mathbb{R}^3\\).",solution:[
+      "Form matrix and compute determinant: \\(\\begin{vmatrix}1&0&1\\\\0&1&1\\\\1&1&0\\end{vmatrix}=1(0-1)-0+1(0-1)=-1-1=-2\\ne 0\\).",
+      "Non-zero determinant ⟹ linearly independent; 3 vectors in 3D ⟹ spans \\(\\mathbb{R}^3\\). Yes, it is a basis."
+    ],answer:"Yes, it is a basis"},
+  ],
+  revision:["Subspace: non-empty + closed under + and ·","Basis: L.I. + spanning; size = dim V","dim(W₁+W₂) = dim W₁ + dim W₂ - dim(W₁∩W₂)","dim(V/W) = dim V - dim W"],
+  expected:["Find dim of intersection given dims of two subspaces","Test if a given set is a basis","Show a set is/is not a subspace","Coordinate vectors w.r.t. a given basis"],
+},
+
+"la-rn":{
+  concept:`<p>For a linear map \(T: V \to W\) with \(V\) finite-dimensional, the <strong>Rank–Nullity Theorem</strong> gives \[\dim V = \text{rank}(T) + \text{nullity}(T)\] where \(\text{rank}(T) = \dim(\text{Im}\,T)\) and \(\text{nullity}(T) = \dim(\ker T)\).</p>
+<p>This single theorem drives a huge fraction of CSIR NET Linear Algebra objective questions.</p>`,
+  definitions:[
+    {term:"Kernel (Null Space)", body:"\\(\\ker T = \\{v\\in V: T(v)=0\\}\\), a subspace of the domain."},
+    {term:"Image (Range)", body:"\\(\\text{Im}\\,T = \\{T(v): v\\in V\\}\\), a subspace of the codomain."},
+    {term:"Nullity", body:"\\(\\text{nullity}(T) = \\dim(\\ker T)\\)"},
+    {term:"Rank", body:"\\(\\text{rank}(T) = \\dim(\\text{Im}\\,T)\\)"},
+  ],
+  theorems:[
+    {name:"Rank–Nullity Theorem", body:"For \\(T: V\\to W\\) linear with \\(\\dim V < \\infty\\): \\[\\text{rank}(T)+\\text{nullity}(T)=\\dim V.\\]",proof:"Choose a basis \\(\\{u_1,\\ldots,u_k\\}\\) for \\(\\ker T\\) and extend to a basis of \\(V\\) by adding \\(v_1,\\ldots,v_r\\). Show \\(T(v_1),\\ldots,T(v_r)\\) is a basis for \\(\\text{Im}\\,T\\), giving \\(r=\\text{rank}(T)\\)."},
+  ],
+  formulas:[
+    {label:"Rank–Nullity", math:"\\(\\text{rank}(T)+\\text{nullity}(T)=\\dim V\\)"},
+    {label:"For matrices", math:"\\(\\text{rank}(A)+\\text{nullity}(A)=n\\) (number of columns)"},
+    {label:"Rank inequality", math:"\\(\\text{rank}(AB)\\le\\min(\\text{rank}(A),\\text{rank}(B))\\)"},
+  ],
+  tricks:[
+    {text:"Rank of a matrix = number of non-zero rows after row reduction = number of pivot columns."},
+    {text:"For \\(A_{m\\times n}\\): \\(\\text{rank}(A)\\le\\min(m,n)\\). If rank = min(m,n), it's full rank."},
+    {text:"\\(T\\) injective ⟺ nullity = 0; \\(T\\) surjective ⟺ rank = dim W."},
+  ],
+  mistakes:[
+    {wrong:"nullity(A) = n - rank(A) where n is the number of rows.",right:"nullity(A) = n - rank(A) where n is the number of COLUMNS (domain dimension)."},
+    {wrong:"rank(A) + rank(B) = rank(A+B).",right:"This is generally false. Rank is sub-additive: rank(A+B) ≤ rank(A)+rank(B)."},
+  ],
+  pyqs:[
+    {year:"CSIR 2023",part:"Part B",diff:"Easy",q:"Let \\(A\\) be a \\(4\\times 6\\) matrix with rank 3. Then the nullity of \\(A\\) is:",solution:["nullity(A) = number of columns − rank = 6 − 3 = 3."],answer:"3"},
+    {year:"CSIR 2021",part:"Part B",diff:"Medium",q:"If \\(T:\\mathbb{R}^5\\to\\mathbb{R}^3\\) is linear and surjective, what is \\(\\dim(\\ker T)\\)?",solution:["Surjective ⟹ rank(T) = dim(codomain) = 3.","By Rank–Nullity: nullity(T) = dim domain − rank = 5 − 3 = 2."],answer:"2"},
+  ],
+  practice:[
+    {diff:"Easy",q:"Find rank and nullity of \\(A=\\begin{pmatrix}1&2&3\\\\2&4&6\\\\3&6&9\\end{pmatrix}\\).",solution:["Row reduce: R2←R2−2R1, R3←R3−3R1 gives all zero except first row.","rank(A) = 1; nullity(A) = 3−1 = 2."],answer:"rank=1, nullity=2"},
+    {diff:"Medium",q:"Can a linear map \\(T:\\mathbb{R}^3\\to\\mathbb{R}^5\\) be surjective?",solution:["If T were surjective, rank(T) = 5.","But rank(T) ≤ dim(domain) = 3 < 5. Contradiction.","So no surjective linear map from ℝ³ to ℝ⁵ exists."],answer:"No — rank ≤ 3 < 5"},
+  ],
+  revision:["rank + nullity = dim(domain)","Nullity uses #columns NOT #rows","T injective ⟺ nullity=0","T surjective ⟺ rank = dim(codomain)"],
+  expected:["Find nullity given rank and matrix size","Determine if a map can be injective/surjective","Compute rank by row reduction","Nullity from the solution space of Ax=0"],
+},
+
+"la-ev":{
+  concept:`<p>A scalar \(\lambda\) is an <strong>eigenvalue</strong> of \(A\) if there exists a nonzero vector \(v\) (called an <strong>eigenvector</strong>) such that \(Av = \lambda v\), i.e., \((A-\lambda I)v = 0\).</p>
+<p>The set of eigenvalues is the <strong>spectrum</strong>. Eigenvalues are roots of the <strong>characteristic polynomial</strong> \(p(\lambda) = \det(A - \lambda I)\).</p>
+<p>The <strong>eigenspace</strong> \(E_\lambda = \ker(A-\lambda I)\) is a subspace. Its dimension is the <strong>geometric multiplicity</strong>; the multiplicity of \(\lambda\) as a root of \(p(\lambda)\) is the <strong>algebraic multiplicity</strong>. Always: geo. mult. ≤ alg. mult.</p>`,
+  definitions:[
+    {term:"Eigenvalue", body:"\\(\\lambda\\in F\\) such that \\(\\det(A-\\lambda I)=0\\)."},
+    {term:"Eigenvector", body:"Nonzero \\(v\\) with \\(Av=\\lambda v\\)."},
+    {term:"Characteristic Polynomial", body:"\\(p(\\lambda)=\\det(A-\\lambda I)\\), a degree-\\(n\\) polynomial."},
+    {term:"Algebraic Multiplicity", body:"Multiplicity of \\(\\lambda\\) as a root of \\(p(\\lambda)\\)."},
+    {term:"Geometric Multiplicity", body:"\\(\\dim\\ker(A-\\lambda I)\\)."},
+    {term:"Spectrum", body:"Set of all eigenvalues of \\(A\\)."},
+  ],
+  theorems:[
+    {name:"Cayley–Hamilton Theorem", body:"Every square matrix satisfies its own characteristic equation: \\(p(A)=0\\).",proof:"Proved by direct substitution using the adjugate matrix identity \\((A-\\lambda I)\\cdot\\text{adj}(A-\\lambda I)=p(\\lambda)I\\)."},
+    {name:"Eigenvectors ↔ Distinct Eigenvalues", body:"Eigenvectors corresponding to distinct eigenvalues are linearly independent."},
+    {name:"Geo. ≤ Alg. Multiplicity", body:"For every eigenvalue \\(\\lambda\\), the geometric multiplicity is at most the algebraic multiplicity."},
+  ],
+  formulas:[
+    {label:"Characteristic equation", math:"\\(\\det(A-\\lambda I)=0\\)"},
+    {label:"Trace = sum of eigenvalues", math:"\\(\\text{tr}(A)=\\sum_{i}\\lambda_i\\)"},
+    {label:"Det = product of eigenvalues", math:"\\(\\det(A)=\\prod_{i}\\lambda_i\\)"},
+    {label:"Eigenvalue of polynomial", math:"If \\(Av=\\lambda v\\), then \\(p(A)v=p(\\lambda)v\\)"},
+    {label:"Cayley–Hamilton", math:"\\(p(A)=0\\)"},
+  ],
+  tricks:[
+    {text:"For a 2×2 matrix: eigenvalues are \\(\\frac{\\text{tr}\\pm\\sqrt{\\text{tr}^2-4\\det}}{2}\\) — faster than expanding det."},
+    {text:"If all eigenvalues of \\(A\\) are known, eigenvalues of \\(A^n\\) are \\(\\lambda^n\\), of \\(A^{-1}\\) are \\(1/\\lambda\\), of \\(kA\\) are \\(k\\lambda\\)."},
+    {text:"Nilpotent matrix (\\(A^k=0\\) for some \\(k\\)) ⟹ all eigenvalues are 0."},
+    {text:"Idempotent matrix (\\(A^2=A\\)) ⟹ eigenvalues are only 0 or 1."},
+  ],
+  mistakes:[
+    {wrong:"eigenvalue 0 means matrix is non-invertible is just a coincidence.",right:"0 is an eigenvalue of A ⟺ A is singular (non-invertible). Always."},
+    {wrong:"Geometric multiplicity can exceed algebraic multiplicity.",right:"Geometric mult ≤ algebraic mult, always. Equality gives diagonalizability."},
+  ],
+  pyqs:[
+    {year:"CSIR 2022",part:"Part C",diff:"Hard",q:"The eigenvalues of \\(A=\\begin{pmatrix}0&1&0\\\\0&0&1\\\\1&0&0\\end{pmatrix}\\) are:",solution:["Characteristic polynomial: \\(-\\lambda^3+1=0 \\Rightarrow \\lambda^3=1\\).","The cube roots of unity: \\(1, \\omega, \\omega^2\\) where \\(\\omega=e^{2\\pi i/3}\\)."],answer:"\\(1, \\omega, \\omega^2\\) (cube roots of unity)"},
+    {year:"CSIR 2020",part:"Part B",diff:"Medium",q:"If \\(A\\) is a \\(3\\times3\\) real matrix with \\(\\text{tr}(A)=6\\) and \\(\\det(A)=6\\), and one eigenvalue is 3, find the other two.",solution:["Let eigenvalues be \\(3,\\lambda_2,\\lambda_3\\).","Sum: \\(3+\\lambda_2+\\lambda_3=6 \\Rightarrow \\lambda_2+\\lambda_3=3\\).","Product: \\(3\\lambda_2\\lambda_3=6 \\Rightarrow \\lambda_2\\lambda_3=2\\).","So \\(\\lambda_2,\\lambda_3\\) are roots of \\(t^2-3t+2=0 \\Rightarrow t=1,2\\)."],answer:"1 and 2"},
+  ],
+  practice:[
+    {diff:"Easy",q:"Find eigenvalues of \\(A=\\begin{pmatrix}4&1\\\\2&3\\end{pmatrix}\\).",solution:["\\(\\det(A-\\lambda I)=(4-\\lambda)(3-\\lambda)-2=\\lambda^2-7\\lambda+10=(\\lambda-5)(\\lambda-2)\\).","Eigenvalues: \\(\\lambda=5,2\\)."],answer:"λ=5 and λ=2"},
+    {diff:"Medium",q:"Use Cayley–Hamilton to find \\(A^{-1}\\) for \\(A=\\begin{pmatrix}1&2\\\\0&3\\end{pmatrix}\\).",solution:["Characteristic polynomial: \\((1-\\lambda)(3-\\lambda)=\\lambda^2-4\\lambda+3\\).","C–H: \\(A^2-4A+3I=0 \\Rightarrow A^2-4A=-3I \\Rightarrow A(A-4I)=-3I\\).","So \\(A^{-1}=\\frac{-(A-4I)}{3}=\\frac{4I-A}{3}=\\frac{1}{3}\\begin{pmatrix}3&-2\\\\0&1\\end{pmatrix}\\)."],answer:"\\(A^{-1}=\\begin{pmatrix}1&-2/3\\\\0&1/3\\end{pmatrix}\\)"},
+  ],
+  revision:["Eigenvalues: solve det(A−λI)=0","tr(A)=Σλᵢ, det(A)=Πλᵢ","Geo mult ≤ alg mult","Cayley–Hamilton: p(A)=0","A^n has eigenvalues λⁿ"],
+  expected:["Compute eigenvalues of 2×2 or 3×3 matrix","Apply Cayley–Hamilton to compute A⁻¹ or A^n","Eigenvalues of special matrices (nilpotent, idempotent, unitary)","Trace and det from eigenvalues"],
+},
+
+"ra-seq":{
+  concept:`<p>A sequence \((a_n)\) converges to \(L\) if \(\forall\varepsilon>0\ \exists N\) such that \(n>N\Rightarrow |a_n-L|<\varepsilon\).</p>
+<p>Standard tests for series: Comparison, Limit Comparison, Ratio, Root (Cauchy), Integral tests. Alternating series (Leibniz): if \(a_n\) is decreasing to 0, \(\sum(-1)^n a_n\) converges.</p>`,
+  definitions:[
+    {term:"Convergent Sequence", body:"\\((a_n)\\to L\\) if \\(\\forall\\varepsilon>0\\ \\exists N: n>N\\Rightarrow |a_n-L|<\\varepsilon\\)."},
+    {term:"Cauchy Sequence", body:"\\(\\forall\\varepsilon>0\\ \\exists N: m,n>N\\Rightarrow |a_m-a_n|<\\varepsilon\\). In \\(\\mathbb{R}\\): Cauchy ⟺ convergent."},
+    {term:"Absolute Convergence", body:"\\(\\sum|a_n|<\\infty\\). Absolute convergence ⟹ convergence."},
+    {term:"Conditional Convergence", body:"\\(\\sum a_n\\) converges but \\(\\sum|a_n|\\) diverges."},
+    {term:"Radius of Convergence", body:"For power series \\(\\sum a_n x^n\\): \\(R=1/\\limsup|a_n|^{1/n}\\)."},
+  ],
+  theorems:[
+    {name:"Monotone Convergence Theorem", body:"Every bounded monotone sequence in \\(\\mathbb{R}\\) converges."},
+    {name:"Bolzano–Weierstrass", body:"Every bounded sequence in \\(\\mathbb{R}^n\\) has a convergent subsequence."},
+    {name:"Ratio Test", body:"If \\(\\lim|a_{n+1}/a_n|=L\\): converges if \\(L<1\\), diverges if \\(L>1\\), inconclusive if \\(L=1\\)."},
+    {name:"Root Test (Cauchy)", body:"If \\(\\limsup|a_n|^{1/n}=L\\): converges if \\(L<1\\), diverges if \\(L>1\\)."},
+  ],
+  formulas:[
+    {label:"Ratio test limit", math:"\\(L=\\lim\\left|\\frac{a_{n+1}}{a_n}\\right|\\)"},
+    {label:"Root test limit", math:"\\(L=\\limsup|a_n|^{1/n}\\)"},
+    {label:"Harmonic series", math:"\\(\\sum\\frac{1}{n}\\) diverges"},
+    {label:"p-series", math:"\\(\\sum\\frac{1}{n^p}\\) converges iff \\(p>1\\)"},
+    {label:"Geometric series", math:"\\(\\sum ar^n=\\frac{a}{1-r}\\) for \\(|r|<1\\)"},
+  ],
+  tricks:[
+    {text:"\\(\\sum 1/(n\\log n)\\) diverges (integral test), but \\(\\sum 1/(n(\\log n)^2)\\) converges — the exponent on log matters."},
+    {text:"Ratio test fails for \\(\\sum 1/n^p\\) — always use the p-series criterion instead."},
+    {text:"For power series: ratio test gives radius of convergence directly."},
+  ],
+  mistakes:[
+    {wrong:"If a_n → 0, then Σaₙ converges.",right:"a_n → 0 is NECESSARY but not sufficient. Harmonic series: aₙ=1/n→0 but Σ1/n diverges."},
+    {wrong:"Ratio test gives a definitive answer when L=1.",right:"When L=1, the ratio test is inconclusive. Use another test."},
+  ],
+  pyqs:[
+    {year:"CSIR 2023",part:"Part B",diff:"Medium",q:"The series \\(\\sum_{n=1}^\\infty \\frac{(-1)^n}{\\sqrt{n}}\\):",solution:["By Leibniz test: \\(1/\\sqrt{n}\\) is decreasing to 0, so the alternating series converges.","\\(\\sum 1/\\sqrt{n}=\\sum 1/n^{1/2}\\) is a p-series with p=1/2<1, hence diverges.","So the series converges conditionally, not absolutely."],answer:"Converges conditionally"},
+    {year:"CSIR 2021",part:"Part B",diff:"Easy",q:"The radius of convergence of \\(\\sum n! x^n\\) is:",solution:["Ratio test: \\(\\lim|(n+1)!x^{n+1}/(n!x^n)|=\\lim(n+1)|x|=\\infty\\) for \\(x\\ne 0\\).","Converges only at \\(x=0\\), so \\(R=0\\)."],answer:"R = 0"},
+  ],
+  practice:[
+    {diff:"Easy",q:"Test convergence: \\(\\sum_{n=1}^\\infty \\frac{n}{2^n}\\).",solution:["Ratio test: \\(\\left|\\frac{(n+1)/2^{n+1}}{n/2^n}\\right|=\\frac{n+1}{2n}\\to\\frac{1}{2}<1\\).","Converges."],answer:"Converges (ratio test)"},
+    {diff:"Medium",q:"Determine convergence of \\(\\sum\\frac{1}{n\\ln n}\\) for \\(n\\ge 2\\).",solution:["Integral test: \\(\\int_2^\\infty\\frac{dx}{x\\ln x}=[\\ln\\ln x]_2^\\infty=\\infty\\).","Series diverges."],answer:"Diverges"},
+  ],
+  revision:["aₙ→0 necessary, NOT sufficient for Σaₙ to converge","p-series: converges iff p>1","Ratio test: L<1 conv, L>1 div, L=1 inconclusive","Alternating series: need decreasing → 0"],
+  expected:["Test convergence/divergence using ratio, root, integral test","Determine absolute vs conditional convergence","Radius of convergence of power series","Cauchy sequences in ℝ"],
+},
+
+"ca-res":{
+  concept:`<p>The <strong>Residue Theorem</strong> is the single most powerful computational tool in complex analysis. If \(f\) is meromorphic inside a simple closed positively-oriented contour \(C\) with isolated singularities at \(z_1,\ldots,z_n\) inside \(C\), then</p>
+<p>\[\oint_C f(z)\,dz = 2\pi i\sum_{k=1}^n \text{Res}(f,z_k).\]</p>
+<p>Applications: evaluation of real integrals \(\int_{-\infty}^\infty f(x)\,dx\) and \(\int_0^{2\pi} R(\cos\theta,\sin\theta)\,d\theta\).</p>`,
+  definitions:[
+    {term:"Isolated Singularity", body:"Point \\(z_0\\) where \\(f\\) is not analytic but is analytic in some punctured disk \\(0<|z-z_0|<r\\)."},
+    {term:"Removable Singularity", body:"Singularity where \\(f\\) can be defined at \\(z_0\\) to make it analytic (\\(\\lim_{z\\to z_0}f(z)\\) exists finitely)."},
+    {term:"Pole of Order m", body:"\\(\\lim_{z\\to z_0}(z-z_0)^m f(z)\\ne 0\\) and is finite; for \\(m=1\\): simple pole."},
+    {term:"Essential Singularity", body:"Neither removable nor a pole; Laurent series has infinitely many negative-power terms."},
+    {term:"Residue", body:"\\(\\text{Res}(f,z_0)=\\) coefficient of \\((z-z_0)^{-1}\\) in the Laurent series of \\(f\\) at \\(z_0\\)."},
+  ],
+  theorems:[
+    {name:"Residue Theorem", body:"\\(\\oint_C f\\,dz = 2\\pi i\\sum_k\\text{Res}(f,z_k)\\) for all singularities \\(z_k\\) inside \\(C\\)."},
+    {name:"Residue at Simple Pole", body:"\\(\\text{Res}(f,z_0)=\\lim_{z\\to z_0}(z-z_0)f(z)\\)."},
+    {name:"Residue at Pole of Order m", body:"\\(\\text{Res}(f,z_0)=\\frac{1}{(m-1)!}\\lim_{z\\to z_0}\\frac{d^{m-1}}{dz^{m-1}}[(z-z_0)^m f(z)]\\)."},
+  ],
+  formulas:[
+    {label:"Residue (simple pole)", math:"\\(\\text{Res}(f,z_0)=\\lim_{z\\to z_0}(z-z_0)f(z)\\)"},
+    {label:"Residue (order m)", math:"\\(\\text{Res}(f,z_0)=\\frac{1}{(m-1)!}\\frac{d^{m-1}}{dz^{m-1}}[(z-z_0)^m f(z)]|_{z_0}\\)"},
+    {label:"Residue (p/q form)", math:"If \\(q(z_0)=0, q'(z_0)\\ne 0\\): \\(\\text{Res}=p(z_0)/q'(z_0)\\)"},
+    {label:"Real integral", math:"\\(\\int_{-\\infty}^\\infty f(x)\\,dx=2\\pi i\\sum\\text{Res}\\) (upper half-plane)"},
+  ],
+  tricks:[
+    {text:"For \\(f(z)=p(z)/q(z)\\) with simple zeros of \\(q\\): \\(\\text{Res}(f,z_0)=p(z_0)/q'(z_0)\\) — faster than the limit formula."},
+    {text:"To evaluate \\(\\int_0^{2\\pi} R(\\cos\\theta,\\sin\\theta)d\\theta\\): substitute \\(z=e^{i\\theta}\\), \\(\\cos\\theta=(z+1/z)/2\\), \\(\\sin\\theta=(z-1/z)/(2i)\\)."},
+    {text:"Essential singularities: use the Laurent series directly; there's no simple residue formula."},
+  ],
+  mistakes:[
+    {wrong:"Sum residues over ALL singularities of f.",right:"Only sum residues at singularities INSIDE the contour C."},
+    {wrong:"Every singularity is a pole.",right:"Check: if Laurent series has infinitely many negative powers, it's an essential singularity, not a pole."},
+  ],
+  pyqs:[
+    {year:"CSIR 2022",part:"Part C",diff:"Hard",q:"Evaluate \\(\\oint_{|z|=3}\\frac{z^2}{(z-1)^2(z+2)}dz\\).",solution:["Singularities: pole of order 2 at z=1, simple pole at z=−2; both inside |z|=3.","Res at z=−2 (simple): \\(\\lim_{z\\to-2}(z+2)f(z)=\\frac{(-2)^2}{(-2-1)^2}=\\frac{4}{9}\\).","Res at z=1 (order 2): \\(\\frac{d}{dz}\\left[\\frac{z^2}{z+2}\\right]_{z=1}=\\frac{2z(z+2)-z^2}{(z+2)^2}|_{z=1}=\\frac{2(3)-1}{9}=\\frac{5}{9}\\).","Sum=4/9+5/9=1; integral=2πi."],answer:"2πi"},
+    {year:"CSIR 2020",part:"Part B",diff:"Medium",q:"\\(\\oint_{|z|=2}\\frac{e^z}{z(z-1)}dz =\\)?",solution:["Poles at z=0 and z=1, both inside |z|=2.","Res(z=0)=e⁰/(0−1)=−1; Res(z=1)=e¹/1=e.","Integral = 2πi(e−1)."],answer:"\\(2\\pi i(e-1)\\)"},
+  ],
+  practice:[
+    {diff:"Easy",q:"Find \\(\\text{Res}\\left(\\frac{1}{z^2+1},i\\right)\\).",solution:["Factoring: \\(z^2+1=(z-i)(z+i)\\). Simple pole at \\(z=i\\).","Res\\(=\\frac{1}{z+i}|_{z=i}=\\frac{1}{2i}\\)."],answer:"1/(2i)"},
+    {diff:"Medium",q:"Evaluate \\(\\int_{-\\infty}^\\infty\\frac{dx}{1+x^4}\\).",solution:["Poles of \\(1/(1+z^4)\\) at \\(z=e^{i\\pi(2k+1)/4}\\), \\(k=0,1,2,3\\).","In upper half-plane: \\(z_1=e^{i\\pi/4}\\), \\(z_2=e^{3i\\pi/4}\\).","Using p/q formula: Res at \\(z_k\\) is \\(\\frac{1}{4z_k^3}\\).","Sum of residues = \\(\\frac{-i}{\\sqrt{2}}\\cdot\\frac{1}{2}\\); integral \\(=\\pi/\\sqrt{2}\\)."],answer:"\\(\\pi/\\sqrt{2}\\)"},
+  ],
+  revision:["Res theorem: ∮f dz = 2πi·Σ Res (inside C)","Simple pole: Res = lim (z−z₀)f(z)","p/q form: Res = p(z₀)/q'(z₀)","Real integral: close with semicircle, sum upper-half residues"],
+  expected:["Evaluate contour integrals using residue theorem","Find residue at poles of various orders","Apply to real improper integrals","Classify singularities"],
+},
+
+"aa-grp":{
+  concept:`<p>A <strong>group</strong> \((G,*)\) is a set with an associative binary operation, an identity element \(e\), and inverses for every element. If the operation is also commutative, \(G\) is <strong>abelian</strong>.</p>
+<p><strong>Lagrange's Theorem</strong>: \(|H|\) divides \(|G|\) for any subgroup \(H\le G\). This is the starting point of most CSIR NET group theory questions.</p>`,
+  definitions:[
+    {term:"Group", body:"Set \\(G\\) with associative operation, identity \\(e\\), and inverses."},
+    {term:"Order of Element", body:"Smallest positive \\(n\\) with \\(a^n=e\\); denoted \\(\\text{ord}(a)\\)."},
+    {term:"Cyclic Group", body:"Generated by a single element: \\(G=\\langle a\\rangle=\\{a^n:n\\in\\mathbb{Z}\\}\\)."},
+    {term:"Coset", body:"For \\(H\\le G\\) and \\(a\\in G\\): \\(aH=\\{ah:h\\in H\\}\\)."},
+    {term:"Index", body:"\\([G:H]=|G|/|H|\\), the number of distinct cosets."},
+  ],
+  theorems:[
+    {name:"Lagrange's Theorem", body:"For finite group \\(G\\) and subgroup \\(H\\), \\(|H|\\) divides \\(|G|\\).",proof:"The cosets of \\(H\\) partition \\(G\\) into \\([G:H]\\) equal-sized pieces of size \\(|H|\\), so \\(|G|=[G:H]\\cdot|H|\\)."},
+    {name:"Order of element divides |G|", body:"For \\(a\\in G\\) finite, \\(\\text{ord}(a)\\) divides \\(|G|\\). Corollary: \\(a^{|G|}=e\\)."},
+    {name:"Cauchy's Theorem", body:"If prime \\(p\\) divides \\(|G|\\), then \\(G\\) has an element of order \\(p\\)."},
+  ],
+  formulas:[
+    {label:"Lagrange", math:"\\(|G|=[G:H]\\cdot|H|\\)"},
+    {label:"Order condition", math:"\\(\\text{ord}(a)\\mid|G|\\)"},
+    {label:"Fermat (group version)", math:"\\(a^{|G|}=e\\)"},
+  ],
+  tricks:[
+    {text:"Every group of prime order is cyclic — immediate from Lagrange."},
+    {text:"If |G|=p² (p prime), then G is abelian (either cyclic or ℤₚ×ℤₚ)."},
+    {text:"Number of elements of order d in a cyclic group ℤₙ: φ(d) where φ is Euler's totient."},
+  ],
+  mistakes:[
+    {wrong:"Every subgroup of an abelian group is normal.",right:"TRUE — but the converse (every group where all subgroups are normal is abelian) is FALSE. Counterexample: quaternion group Q₈."},
+    {wrong:"If |H| divides |G|, then H is a subgroup.",right:"Converse of Lagrange is false in general. e.g. |A₄|=12 has no subgroup of order 6."},
+  ],
+  pyqs:[
+    {year:"CSIR 2023",part:"Part B",diff:"Easy",q:"Number of elements of order 4 in \\(\\mathbb{Z}_{12}\\):",solution:["Order of \\([k]\\) in \\(\\mathbb{Z}_{12}\\) is \\(12/\\gcd(k,12)\\).","Need \\(12/\\gcd(k,12)=4 \\Rightarrow \\gcd(k,12)=3\\).","Such \\(k\\in\\{1,...,12\\}\\): \\(k=3,9\\). So 2 elements."],answer:"2"},
+    {year:"CSIR 2021",part:"Part C",diff:"Hard",q:"Let \\(G\\) be a group of order 35. Is \\(G\\) cyclic?",solution:["35=5×7. By Sylow theorems, n₅∣7 and n₅≡1 mod 5, so n₅=1; similarly n₇=1.","Unique Sylow 5- and 7-subgroups are normal; their intersection is trivial.","G≅ℤ₅×ℤ₇≅ℤ₃₅. Yes, G is cyclic."],answer:"Yes, G is cyclic (≅ ℤ₃₅)"},
+  ],
+  practice:[
+    {diff:"Easy",q:"Prove every group of prime order is cyclic.",solution:["Let |G|=p prime. Pick a≠e in G.","ord(a) divides p; since ord(a)≠1 (a≠e), ord(a)=p.","⟨a⟩ has p elements = |G|, so G=⟨a⟩ is cyclic."],answer:"Proved using Lagrange"},
+    {diff:"Medium",q:"Find all subgroups of \\(\\mathbb{Z}_{12}\\).",solution:["Subgroups of ℤ₁₂ correspond to divisors of 12: 1,2,3,4,6,12.","Subgroups: ⟨0⟩, ⟨6⟩=2-elem, ⟨4⟩=3-elem, ⟨3⟩=4-elem, ⟨2⟩=6-elem, ℤ₁₂."],answer:"6 subgroups (one for each divisor of 12)"},
+  ],
+  revision:["Lagrange: |H| divides |G|","ord(a) divides |G|","Prime order ⟹ cyclic","Cosets partition G","Cauchy: p||G| ⟹ element of order p"],
+  expected:["Apply Lagrange to find possible orders","Count elements of given order","Determine if a group of given order is cyclic","Identify subgroups of ℤₙ"],
+},
+
+};
+
+/* default stub content for units not yet fully authored */
+function stubContent(unitName, topicName){
+  return {
+    concept:`<p>This unit covers <strong>${unitName}</strong> as part of ${topicName}. Detailed theory, proofs, and worked examples will be added in the next update.</p><p>Focus areas for CSIR NET: key definitions, main theorems, and standard problem types for this unit.</p>`,
+    definitions:[], theorems:[], formulas:[], tricks:[], mistakes:[], pyqs:[], practice:[],
+    revision:[`Study ${unitName} from standard references (Artin, Rudin, Ahlfors, etc.)`,"Solve past CSIR NET papers for this unit","Focus on theorem statement, proof idea, and applications"],
+    expected:[`Important theorems in ${unitName}`,"Standard CSIR NET problem patterns","Application-based questions"],
+  };
+}
+
+/* ============================================================
+   FLASHCARD DATA
+============================================================ */
+const FLASHCARDS = [
+  {topic:"Linear Algebra",front:"State the Rank–Nullity Theorem",back:"For \\(T:V\\to W\\) linear with \\(\\dim V<\\infty\\):\\[\\text{rank}(T)+\\text{nullity}(T)=\\dim V.\\]"},
+  {topic:"Linear Algebra",front:"When is a matrix diagonalizable?",back:"\\(A\\) is diagonalizable iff for every eigenvalue, geometric multiplicity = algebraic multiplicity."},
+  {topic:"Linear Algebra",front:"What is the Cayley–Hamilton Theorem?",back:"Every square matrix satisfies its own characteristic equation: \\(p(A)=0\\)."},
+  {topic:"Linear Algebra",front:"Spectral Theorem (real symmetric)",back:"Every real symmetric matrix is orthogonally diagonalizable: \\(A=Q\\Lambda Q^T\\) with \\(Q\\) orthogonal."},
+  {topic:"Real Analysis",front:"State the Bolzano–Weierstrass Theorem",back:"Every bounded sequence in \\(\\mathbb{R}^n\\) has a convergent subsequence."},
+  {topic:"Real Analysis",front:"Difference: pointwise vs uniform convergence",back:"Uniform: \\(\\forall\\varepsilon>0\\ \\exists N\\) (independent of \\(x\\)) such that \\(n>N\\Rightarrow|f_n(x)-f(x)|<\\varepsilon\\ \\forall x\\). Pointwise: \\(N\\) may depend on \\(x\\)."},
+  {topic:"Real Analysis",front:"When is \\(f\\) Riemann integrable on \\([a,b]\\)?",back:"\\(f\\) is bounded and continuous almost everywhere (i.e., the set of discontinuities has measure zero)."},
+  {topic:"Real Analysis",front:"State the Intermediate Value Theorem",back:"If \\(f:[a,b]\\to\\mathbb{R}\\) is continuous and \\(f(a)<c<f(b)\\), then \\(\\exists x_0\\in(a,b)\\) with \\(f(x_0)=c\\)."},
+  {topic:"Complex Analysis",front:"State the Cauchy–Riemann equations",back:"For \\(f=u+iv\\) analytic: \\(u_x=v_y\\) and \\(u_y=-v_x\\)."},
+  {topic:"Complex Analysis",front:"Residue at a simple pole",back:"\\(\\text{Res}(f,z_0)=\\lim_{z\\to z_0}(z-z_0)f(z)\\). If \\(f=p/q\\): \\(\\text{Res}=p(z_0)/q'(z_0)\\)."},
+  {topic:"Complex Analysis",front:"State the Liouville Theorem",back:"Every bounded entire function is constant."},
+  {topic:"Abstract Algebra",front:"State Lagrange's Theorem",back:"For finite group \\(G\\) and \\(H\\le G\\): \\(|H|\\) divides \\(|G|\\). Moreover \\(|G|=[G:H]\\cdot|H|\\)."},
+  {topic:"Abstract Algebra",front:"What does the First Isomorphism Theorem say?",back:"For homomorphism \\(\\phi:G\\to H\\): \\(G/\\ker\\phi\\cong\\text{Im}\\,\\phi\\)."},
+  {topic:"Abstract Algebra",front:"State Sylow's First Theorem",back:"If \\(p^k\\mid|G|\\), then \\(G\\) has a subgroup of order \\(p^k\\). In particular, Sylow \\(p\\)-subgroups of order \\(p^n\\) exist when \\(|G|=p^n m\\), \\(p\\nmid m\\)."},
+  {topic:"ODE","front":"Integrating factor for linear ODE \\(y'+P(x)y=Q(x)\\)",back:"Multiply by \\(\\mu=e^{\\int P\\,dx}\\); solution: \\(y=\\frac{1}{\\mu}\\int \\mu Q\\,dx\\)."},
+  {topic:"Topology",front:"Define a compact topological space",back:"\\(X\\) is compact if every open cover has a finite subcover. In metric spaces: equivalent to sequentially compact (every sequence has a convergent subsequence)."},
+  {topic:"Topology",front:"Continuous image of a compact space is...",back:"Compact. Proof: pull back open cover via continuity to get an open cover of the compact domain, extract finite subcover, push forward."},
+];
+
+/* ============================================================
+   FORMULA HANDBOOK DATA
+============================================================ */
+const HANDBOOK = {
+  "Linear Algebra":[
+    {label:"Rank–Nullity",math:"\\(\\text{rank}(T)+\\text{nullity}(T)=\\dim V\\)"},
+    {label:"Dimension formula",math:"\\(\\dim(W_1+W_2)=\\dim W_1+\\dim W_2-\\dim(W_1\\cap W_2)\\)"},
+    {label:"Eigenvalue (char. poly)",math:"\\(\\det(A-\\lambda I)=0\\)"},
+    {label:"Trace = Σ eigenvalues",math:"\\(\\text{tr}(A)=\\sum\\lambda_i\\)"},
+    {label:"Det = Π eigenvalues",math:"\\(\\det(A)=\\prod\\lambda_i\\)"},
+    {label:"Cayley–Hamilton",math:"\\(p(A)=0\\)"},
+    {label:"Spectral theorem",math:"\\(A=Q\\Lambda Q^T\\) (real symmetric)"},
+  ],
+  "Real Analysis":[
+    {label:"p-series",math:"\\(\\sum 1/n^p\\) converges iff \\(p>1\\)"},
+    {label:"Geometric series",math:"\\(\\sum ar^n=a/(1-r),\\ |r|<1\\)"},
+    {label:"Mean Value Theorem",math:"\\(f'(c)=\\frac{f(b)-f(a)}{b-a}\\)"},
+    {label:"Taylor's theorem",math:"\\(f(x)=\\sum_{k=0}^n\\frac{f^{(k)}(a)}{k!}(x-a)^k+R_n\\)"},
+    {label:"Cauchy criterion",math:"\\((a_n)\\) converges ⟺ it is a Cauchy sequence in \\(\\mathbb{R}\\)"},
+  ],
+  "Complex Analysis":[
+    {label:"Cauchy's Integral Formula",math:"\\(f^{(n)}(a)=\\frac{n!}{2\\pi i}\\oint_C\\frac{f(z)}{(z-a)^{n+1}}dz\\)"},
+    {label:"Residue theorem",math:"\\(\\oint_C f\\,dz=2\\pi i\\sum\\text{Res}\\)"},
+    {label:"Residue (simple pole)",math:"\\(\\text{Res}(f,z_0)=\\lim_{z\\to z_0}(z-z_0)f(z)\\)"},
+    {label:"Residue p/q",math:"\\(\\text{Res}=p(z_0)/q'(z_0)\\)"},
+    {label:"Laurent series",math:"\\(f(z)=\\sum_{n=-\\infty}^\\infty c_n(z-z_0)^n\\)"},
+  ],
+  "Abstract Algebra":[
+    {label:"Lagrange",math:"\\(|G|=[G:H]\\cdot|H|\\)"},
+    {label:"First Isomorphism",math:"\\(G/\\ker\\phi\\cong\\text{Im}\\,\\phi\\)"},
+    {label:"Sylow count conditions",math:"\\(n_p\\equiv 1\\pmod p,\\ n_p\\mid m\\)"},
+    {label:"Order of element",math:"\\(\\text{ord}(a)\\mid|G|\\)"},
+  ],
+};
+
+/* ============================================================
+   STATE
+============================================================ */
+const STATE = {
+  bookmarks: JSON.parse(localStorage.getItem('csir_bookmarks')||'[]'),
+  progress:  JSON.parse(localStorage.getItem('csir_progress')||'{}'),
+  solved:    JSON.parse(localStorage.getItem('csir_solved')||'[]'),
+  fcIndex: 0, fcFlipped: false,
+  pyqFilter: {year:'all', diff:'all'},
+};
+function saveState(){
+  localStorage.setItem('csir_bookmarks', JSON.stringify(STATE.bookmarks));
+  localStorage.setItem('csir_progress',  JSON.stringify(STATE.progress));
+  localStorage.setItem('csir_solved',    JSON.stringify(STATE.solved));
+}
+
+/* ============================================================
+   SIDEBAR RENDER
+============================================================ */
+function renderSidebar(){
+  const sb = document.getElementById('sb-body');
+  let html = '';
+  const groups = {
+    '5star': TOPICS.filter(t=>t.weight==='5star'),
+    '4star': TOPICS.filter(t=>t.weight==='4star'),
+    '3star': TOPICS.filter(t=>t.weight==='3star'),
+    '2star': TOPICS.filter(t=>t.weight==='2star'),
+  };
+  const labels = {'5star':'⭐⭐⭐⭐⭐ Highest','4star':'⭐⭐⭐⭐ High','3star':'⭐⭐⭐ Medium','2star':'⭐⭐ Supplementary'};
+  for(const [w, tops] of Object.entries(groups)){
+    if(!tops.length) continue;
+    html += `<div class="sb-section"><div class="sb-section-label">${labels[w]}</div>`;
+    tops.forEach(t=>{
+      const pct = STATE.progress[t.id]||0;
+      html += `<div class="sb-topic" id="nav-${t.id}" onclick="showTopic('${t.id}')">
+        <span class="topic-name">${t.name}</span>
+      </div>
+      <div class="sb-progress-bar"><div class="sb-progress-fill" style="width:${pct}%"></div></div>`;
+    });
+    html += '</div>';
+  }
+  sb.innerHTML = html;
+}
+renderSidebar();
+
+/* ============================================================
+   HOME GRID RENDER
+============================================================ */
+function renderHome(){
+  const grids = {'5star':'grid-high','4star':'grid-med','3star':'grid-mid','2star':'grid-low'};
+  Object.keys(grids).forEach(w=>{
+    const el = document.getElementById(grids[w]);
+    const tops = TOPICS.filter(t=>t.weight===w);
+    el.innerHTML = tops.map(t=>`
+      <div class="topic-card" onclick="showTopic('${t.id}')">
+        <div class="tc-stars">${t.stars}</div>
+        <h3>${t.name}</h3>
+        <p>${t.desc}</p>
+        <div class="tc-meta">
+          <span class="tc-badge ${t.badge}">${t.badge==='high'?'Highest':t.badge==='med'?'High':t.badge==='mid'?'Medium':'Supp.'}</span>
+          <span class="tc-units">${t.units.length} units</span>
+        </div>
+      </div>`).join('');
+  });
+}
+renderHome();
+
+/* ============================================================
+   TOPIC PAGE RENDER
+============================================================ */
+function buildTopicPage(t){
+  const existing = document.getElementById('tp-'+t.id);
+  if(existing) return;
+  const wrap = document.getElementById('topic-container');
+  const div = document.createElement('div');
+  div.className='page';
+  div.id='tp-'+t.id;
+
+  let tabs = t.units.map((u,i)=>`<span class="unit-tab" id="tab-${u.id}" onclick="scrollToUnit('${u.id}')">${i+1}. ${u.name}</span>`).join('');
+
+  let units = t.units.map((u,idx)=>{
+    const data = UNIT_CONTENT[u.id] || stubContent(u.name, t.name);
+    return buildUnitHTML(u, idx+1, data, t.id);
+  }).join('');
+
+  div.innerHTML = `
+    <div id="content-${t.id}">
+      <div class="topic-header">
+        <div class="tc-stars" style="font-size:1.1rem;margin-bottom:6px;">${t.stars}</div>
+        <h1 class="serif">${t.name}</h1>
+        <p class="sub">${t.desc}</p>
+        <div class="meta-chips">
+          <span class="chip red">Last 10 yrs: ~${t.q10yr} questions</span>
+          <span class="chip gold">Recommended: ${t.hours} hrs</span>
+          <span class="chip green">${t.units.length} Units</span>
+        </div>
+      </div>
+      <div class="unit-tabs">${tabs}</div>
+      <div id="units-${t.id}">${units}</div>
+    </div>`;
+  wrap.appendChild(div);
+}
+
+function buildUnitHTML(u, num, data, topicId){
+  const uid = u.id;
+  const pids = (arr, prefix)=>arr.map((_,i)=>`${prefix}-${uid}-${i}`);
+
+  // build problems HTML
+  function buildProblems(arr, prefix){
+    if(!arr||!arr.length) return '<p style="color:var(--ink3);font-size:.87rem;">Problems coming soon.</p>';
+    return arr.map((p,i)=>{
+      const pid=`${prefix}-${uid}-${i}`;
+      const bkmarked=STATE.bookmarks.includes(pid);
+      const steps = Array.isArray(p.solution) ? p.solution : [];
+      const stepsHTML=steps.map(s=>`<div class="sol-step">${s}</div>`).join('');
+      const diff=p.diff||'';
+      const diffClass=diff==='Hard'?'diff hard':'diff';
+      return `<div class="problem-card" id="pc-${pid}">
+        <div class="problem-head">
+          <div class="p-meta">
+            ${p.year?`<span class="p-tag year">${p.year}</span>`:''}
+            ${p.part?`<span class="p-tag part">${p.part}</span>`:''}
+            ${diff?`<span class="p-tag ${diffClass}">${diff}</span>`:''}
+          </div>
+          <button class="bookmark-btn ${bkmarked?'active':''}" onclick="toggleBookmark('${pid}',this)" title="Bookmark">⭐</button>
+        </div>
+        <div class="problem-body">
+          <div class="problem-q">${p.q}</div>
+          <span class="solution-toggle" onclick="toggleSol('sol-${pid}',this)">▼ Show Solution</span>
+          <div class="solution-body" id="sol-${pid}">
+            ${stepsHTML}
+            ${p.answer?`<div class="sol-final">Answer: ${p.answer}</div>`:''}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  const sections = [
+    {icon:"📘", title:"Concept Summary", id:"cs", body:`<div class="concept-text">${data.concept||''}</div>`},
+    {icon:"📌", title:"Important Definitions", id:"def", body: data.definitions&&data.definitions.length?`<ul class="def-list">${data.definitions.map(d=>`<li class="def-item"><div class="def-term">${d.term}</div><div class="def-body">${d.body}</div></li>`).join('')}</ul>`:'<p style="color:var(--ink3)">Coming soon.</p>'},
+    {icon:"⭐", title:"Important Theorems", id:"thm", body: data.theorems&&data.theorems.length?data.theorems.map((t,i)=>`<div class="theorem-box"><div class="thm-label">Theorem</div><div class="thm-name">${t.name}</div><div class="thm-body">${t.body}</div>${t.proof?`<span class="proof-toggle" onclick="toggleProof('pf-${uid}-${i}',this)">▶ View Proof Idea</span><div class="proof-box" id="pf-${uid}-${i}">${t.proof}</div>`:''}</div>`).join(''):'<p style="color:var(--ink3)">Coming soon.</p>'},
+    {icon:"📐", title:"Formula Sheet", id:"form", body: data.formulas&&data.formulas.length?`<div class="formula-grid">${data.formulas.map(f=>`<div class="formula-item"><div class="formula-label">${f.label}</div><div class="formula-math">${f.math}</div></div>`).join('')}</div>`:'<p style="color:var(--ink3)">Coming soon.</p>'},
+    {icon:"💡", title:"Tricks & Shortcuts", id:"trk", body: data.tricks&&data.tricks.length?data.tricks.map(t=>`<div class="trick-item"><div class="trick-icon">💡</div><div class="trick-body">${t.text}</div></div>`).join(''):'<p style="color:var(--ink3)">Coming soon.</p>'},
+    {icon:"❌", title:"Common Mistakes", id:"mis", body: data.mistakes&&data.mistakes.length?data.mistakes.map(m=>`<div class="mistake-item"><div class="mx-icon">❌</div><div><div class="mistake-wrong">✗ Wrong: ${m.wrong}</div><div class="mistake-right">✓ Correct: ${m.right}</div></div></div>`).join(''):'<p style="color:var(--ink3)">Coming soon.</p>'},
+    {icon:"✅", title:"PYQ (Previous Year Questions)", id:"pyq", body: `<div class="pyq-filters">
+      <span class="pyq-filter active" onclick="filterPYQ('${uid}','all','year',this)">All Years</span>
+      <span class="pyq-filter" onclick="filterPYQ('${uid}','Easy','diff',this)">Easy</span>
+      <span class="pyq-filter" onclick="filterPYQ('${uid}','Medium','diff',this)">Medium</span>
+      <span class="pyq-filter" onclick="filterPYQ('${uid}','Hard','diff',this)">Hard</span>
+    </div><div id="pyq-list-${uid}">${buildProblems(data.pyqs,'pyq')}</div>`},
+    {icon:"📝", title:"CSIR Level Practice Problems", id:"prac", body: buildProblems(data.practice,'prac')},
+    {icon:"⚡", title:"One-Minute Revision", id:"rev", body: data.revision&&data.revision.length?`<div class="revision-grid">${data.revision.map((r,i)=>`<div class="rev-card"><div class="rev-label">Point ${i+1}</div><div class="rev-text">${r}</div></div>`).join('')}</div>`:'<p style="color:var(--ink3)">Coming soon.</p>'},
+    {icon:"🎯", title:"Expected Questions", id:"exp", body: data.expected&&data.expected.length?`<ul class="expected-list">${data.expected.map(e=>`<li>${e}</li>`).join('')}</ul>`:'<p style="color:var(--ink3)">Coming soon.</p>'},
+  ];
+
+  const sectionsHTML = sections.map(s=>`
+    <div class="section-block">
+      <div class="section-header" onclick="toggleSection('sb-${uid}-${s.id}','stgl-${uid}-${s.id}')">
+        <span class="section-icon">${s.icon}</span>
+        <h4>${s.title}</h4>
+        <span class="section-toggle" id="stgl-${uid}-${s.id}">▼</span>
+      </div>
+      <div class="section-body" id="sb-${uid}-${s.id}">${s.body}</div>
+    </div>`).join('');
+
+  return `<div class="unit-block" id="unit-${uid}">
+    <div class="unit-title">
+      <span class="unit-num">${String(num).padStart(2,'0')}</span>
+      <h2>${u.name}</h2>
+    </div>
+    ${sectionsHTML}
+  </div>`;
+}
+
+/* ============================================================
+   NAVIGATION
+============================================================ */
+function showPage(id, skipHistory=false){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg = document.getElementById('page-'+id);
+  if(pg) pg.classList.add('active');
+  document.getElementById('breadcrumb').textContent = id.replace(/-/g,' ');
+  updateActiveSb(null);
+  window.scrollTo({top:0,behavior:'auto'});
+  if(id==='flashcards') initFlashcards();
+  if(id==='handbook') renderHandbook();
+  if(id==='weightage') renderWeightage();
+  if(id==='progress') renderProgress();
+  if(id==='bookmarks') renderBookmarks();
+  if(id==='study-plan') showPlan(60);
+  if(!skipHistory){
+    window.history.pushState({type:'page',id}, '', `#page-${id}`);
+  }
+  updateBackButton();
+  setTimeout(renderMath,100);
+}
+
+function showTopic(tid, uid='', skipHistory=false){
+  const t = TOPICS.find(x=>x.id===tid);
+  if(!t) return;
+  buildTopicPage(t);
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const pg = document.getElementById('tp-'+tid);
+  if(pg){pg.classList.add('active');}
+  document.getElementById('breadcrumb').textContent = t.name;
+  updateActiveSb(tid);
+  window.scrollTo({top:0,behavior:'auto'});
+  if(uid){
+    setTimeout(()=>scrollToUnit(uid), 160);
+  }
+  if(!skipHistory) {
+    if(uid) window.history.pushState({type:'topic',id:tid,uid}, '', `#topic-${tid}-${uid}`);
+    else window.history.pushState({type:'topic',id:tid}, '', `#topic-${tid}`);
+  }
+  updateBackButton();
+  setTimeout(renderMath,150);
+}
+
+function updateActiveSb(tid){
+  document.querySelectorAll('.sb-topic').forEach(el=>el.classList.remove('active'));
+  if(tid){const nav=document.getElementById('nav-'+tid);if(nav)nav.classList.add('active');}
+}
+
+function updateBackButton(){
+  const btn=document.getElementById('back-btn');
+  if(window.history.state || window.location.hash){
+    btn.style.display='inline-flex';
+  } else {
+    btn.style.display='none';
+  }
+}
+
+function goBack(){
+  window.history.back();
+}
+
+window.addEventListener('popstate', event=>{
+  const state = event.state;
+  if(state && state.type==='topic'){
+    showTopic(state.id, state.uid||'', true);
+  } else if(state && state.type==='page'){
+    showPage(state.id, true);
+  } else if(window.location.hash.startsWith('#topic-')){
+    const parts = window.location.hash.replace('#topic-','').split('-');
+    const tid = parts.shift();
+    const uid = parts.join('-');
+    showTopic(tid, uid || '', true);
+  } else if(window.location.hash.startsWith('#page-')){
+    showPage(window.location.hash.replace('#page-',''), true);
+  } else {
+    showPage('home', true);
+  }
+});
+
+function scrollToUnit(uid){
+  const el=document.getElementById('unit-'+uid);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
+  const tab=document.getElementById('tab-'+uid);
+  if(tab) tab.classList.add('active');
+}
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const main=document.getElementById('main');
+  sb.classList.toggle('collapsed');
+  main.classList.toggle('full');
+}
+
+/* ============================================================
+   TOGGLES
+============================================================ */
+function toggleSection(bodyId, toggleId){
+  const b=document.getElementById(bodyId);
+  const t=document.getElementById(toggleId);
+  if(!b) return;
+  const open=b.classList.toggle('open');
+  if(t) t.classList.toggle('open',open);
+  if(open) setTimeout(renderMath,80);
+}
+function toggleSol(solId,btn){
+  const s=document.getElementById(solId);
+  if(!s) return;
+  const open=s.classList.toggle('open');
+  btn.textContent=open?'▲ Hide Solution':'▼ Show Solution';
+  if(open) setTimeout(renderMath,80);
+}
+function toggleProof(pfId,btn){
+  const p=document.getElementById(pfId);
+  if(!p) return;
+  const open=p.classList.toggle('open');
+  btn.textContent=open?'▼ Hide Proof':'▶ View Proof Idea';
+  if(open) setTimeout(renderMath,80);
+}
+
+/* ============================================================
+   BOOKMARKS
+============================================================ */
+function toggleBookmark(pid, btn){
+  const idx=STATE.bookmarks.indexOf(pid);
+  if(idx>-1){STATE.bookmarks.splice(idx,1);btn.classList.remove('active');}
+  else{STATE.bookmarks.push(pid);btn.classList.add('active');}
+  saveState();
+}
+function renderBookmarks(){
+  const el=document.getElementById('bookmark-list');
+  if(!STATE.bookmarks.length){el.innerHTML='<p style="color:var(--ink3);">No bookmarks yet. Star problems to save them here.</p>';return;}
+  el.innerHTML=`<p style="color:var(--ink3);margin-bottom:16px;">${STATE.bookmarks.length} bookmarked problems.</p>`+
+    STATE.bookmarks.map(id=>`<div class="problem-card"><div class="problem-body"><div class="problem-q">Bookmark: <span class="mono" style="font-size:.8rem;">${id}</span></div><button class="fc-btn" onclick="navigateToBookmark('${id}')">Go to problem</button></div></div>`).join('');
+}
+function navigateToBookmark(pid){
+  const parts=pid.split('-');
+  if(parts.length>=2){const tid=parts[1];showTopic(tid);}
+}
+
+/* ============================================================
+   PYQ FILTER
+============================================================ */
+function filterPYQ(uid, val, type, btn){
+  document.querySelectorAll(`[onclick*="filterPYQ('${uid}'"]`).forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const data = UNIT_CONTENT[uid] || stubContent(uid,'');
+  const items = Array.isArray(data.pyqs) ? data.pyqs : [];
+  const filtered = items.filter(item => {
+    if(val==='all') return true;
+    if(type==='diff') return item.diff===val;
+    if(type==='year') return String(item.year)===String(val);
+    return true;
+  });
+  const listEl = document.getElementById(`pyq-list-${uid}`);
+  if(listEl){
+    listEl.innerHTML = filtered.length ? buildProblems(filtered,'pyq') : '<p style="color:var(--ink3);font-size:.87rem;">No PYQs match this filter.</p>';
+    setTimeout(renderMath,80);
+  }
+}
+
+/* ============================================================
+   FLASHCARDS
+============================================================ */
+let fcCards=[];let fcIdx=0;let fcFlipped=false;
+function initFlashcards(){
+  fcCards=[...FLASHCARDS];
+  fcIdx=0;fcFlipped=false;
+  const bar=document.getElementById('fc-filter-bar');
+  const topics=['All',...new Set(FLASHCARDS.map(f=>f.topic))];
+  bar.innerHTML=topics.map(t=>`<span class="pyq-filter ${t==='All'?'active':''}" onclick="filterFC('${t}',this)">${t}</span>`).join('');
+  showFC();
+}
+function filterFC(topic,btn){
+  document.querySelectorAll('#fc-filter-bar .pyq-filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  fcCards=topic==='All'?[...FLASHCARDS]:FLASHCARDS.filter(f=>f.topic===topic);
+  fcIdx=0;fcFlipped=false;showFC();
+}
+function showFC(){
+  if(!fcCards.length) return;
+  const c=fcCards[fcIdx];
+  document.getElementById('fc-front-text').innerHTML=c.front;
+  document.getElementById('fc-back-text').innerHTML=c.back;
+  document.getElementById('fc-count').textContent=`${fcIdx+1} / ${fcCards.length}`;
+  document.getElementById('fc-inner').classList.remove('flipped');
+  fcFlipped=false;
+  setTimeout(renderMath,80);
+}
+function flipCard(){const el=document.getElementById('fc-inner');el.classList.toggle('flipped');fcFlipped=!fcFlipped;}
+function fcNext(){fcIdx=(fcIdx+1)%fcCards.length;showFC();}
+function fcPrev(){fcIdx=(fcIdx-1+fcCards.length)%fcCards.length;showFC();}
+
+/* ============================================================
+   FORMULA HANDBOOK
+============================================================ */
+function renderHandbook(){
+  const el=document.getElementById('handbook-content');
+  el.innerHTML=Object.entries(HANDBOOK).map(([topic,formulas])=>`
+    <div class="handbook-topic">
+      <h3>${topic}</h3>
+      <div class="formula-grid">${formulas.map(f=>`<div class="formula-item"><div class="formula-label">${f.label}</div><div class="formula-math">${f.math}</div></div>`).join('')}</div>
+    </div>`).join('');
+  setTimeout(renderMath,100);
+}
+
+/* ============================================================
+   WEIGHTAGE TRACKER
+============================================================ */
+function renderWeightage(){
+  const tb=document.getElementById('wt-tbody');
+  const maxQ=Math.max(0,...TOPICS.map(t=>t.q10yr));
+  tb.innerHTML=TOPICS.map(t=>`<tr>
+    <td style="font-weight:500">${t.name}</td>
+    <td>${t.stars}</td>
+    <td style="font-family:var(--mono)">${t.q10yr}</td>
+    <td style="font-family:var(--mono)">${t.hours} hrs</td>
+    <td><div class="wt-bar" style="width:${maxQ?Math.round(t.q10yr/maxQ*100):0}px"></div></td>
+  </tr>`).join('');
+}
+
+/* ============================================================
+   STUDY PLAN
+============================================================ */
+function showPlan(days){
+  const plan=[];
+  const schedule=[
+    {topic:"Linear Algebra",units:["Vector Spaces","Linear Transformations","Matrices","Rank–Nullity"]},
+    {topic:"Linear Algebra",units:["Eigenvalues & Eigenvectors","Diagonalization","Inner Product Spaces","Spectral Theorem"]},
+    {topic:"Real Analysis",units:["Sequences & Series","Continuity"]},
+    {topic:"Real Analysis",units:["Differentiation","Riemann Integration"]},
+    {topic:"Real Analysis",units:["Metric Spaces","Uniform Convergence"]},
+    {topic:"Complex Analysis",units:["Analytic Functions","Cauchy Theorem"]},
+    {topic:"Complex Analysis",units:["Laurent Series","Residues","Conformal Mapping"]},
+    {topic:"Abstract Algebra",units:["Groups","Homomorphisms & Quotients"]},
+    {topic:"Abstract Algebra",units:["Sylow Theorems","Rings","Fields"]},
+    {topic:"ODE & PDE",units:["First Order ODEs","Linear ODEs"]},
+    {topic:"ODE & PDE",units:["Series Solutions","PDEs"]},
+    {topic:"Calculus",units:["Multivariable","Vector Calculus"]},
+    {topic:"Topology",units:["Topological Spaces","Compactness","Connectedness"]},
+    {topic:"Numerical Analysis",units:["Root Finding","Interpolation"]},
+    {topic:"Integral Equations & Mechanics",units:["Fredholm","Volterra","Lagrangian"]},
+  ];
+  const daysPerBlock=Math.max(1,Math.floor(days/schedule.length));
+  let d=1;
+  schedule.forEach(s=>{
+    for(let i=0;i<daysPerBlock&&d<=days;i++,d++){
+      plan.push({day:d,topic:s.topic,units:s.units,type:i===0?'Learn':'Practice'});
+    }
+  });
+  // fill remaining
+  for(;d<=days;d++) plan.push({day:d,topic:'Revision & Mock Tests',units:['Full syllabus review'],type:'Revision'});
+  const el=document.getElementById('plan-content');
+  el.innerHTML=plan.map(p=>`<div class="day-card">
+    <div class="day-num">DAY ${p.day} · ${p.type}</div>
+    <div class="day-topic">${p.topic}</div>
+    <div class="day-units">${p.units.join(', ')}</div>
+  </div>`).join('');
+}
+
+/* ============================================================
+   PROGRESS
+============================================================ */
+function renderProgress(){
+  document.getElementById('pg-bookmarks').textContent=STATE.bookmarks.length;
+  document.getElementById('pg-solved').textContent=STATE.solved.length;
+  document.getElementById('pg-completed').textContent=Object.values(STATE.progress).filter(v=>v>=80).length;
+  const panel=document.getElementById('progress-panel');
+  panel.innerHTML=`<div id="progress-panel-inner">`+TOPICS.map(t=>{
+    const pct=STATE.progress[t.id]||0;
+    return `<div class="prog-topic">
+      <span class="prog-check">${pct>=80?'✅':'⬜'}</span>
+      <span class="prog-name">${t.name}</span>
+      <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:${pct}%"></div></div>
+      <span class="prog-pct">${pct}%</span>
+      <button class="fc-btn" style="padding:4px 8px;font-size:.7rem;" onclick="markProgress('${t.id}',${Math.min(100,pct+20)})">+20%</button>
+    </div>`;
+  }).join('')+'</div>';
+}
+function markProgress(tid,pct){
+  STATE.progress[tid]=pct;saveState();renderProgress();renderSidebar();
+}
+
+/* ============================================================
+   MOCK TEST
+============================================================ */
+const MOCK_QUESTIONS=[
+  {q:"The rank of a \\(3\\times 3\\) matrix \\(A\\) with \\(\\det(A)=0\\) and \\(A\\ne 0\\) can be:",opts:["0","1 or 2","3","None of these"],ans:1,sol:"det=0 means rank<3; A≠0 means rank≥1. So rank ∈ {1,2}."},
+  {q:"Which of the following is a subspace of \\(\\mathbb{R}^3\\)?",opts:["\\(\\{(x,y,z):x+y+z=1\\}\\)","\\(\\{(x,y,z):x^2+y^2=z^2\\}\\)","\\(\\{(x,y,z):x+y+z=0\\}\\)","\\(\\{(x,y,z):xyz=0\\}\\)"],ans:2,sol:"The set {x+y+z=0} is the kernel of a linear map, hence a subspace."},
+  {q:"If \\(p(\\lambda)=\\lambda^2-5\\lambda+6\\) is the characteristic polynomial of \\(A\\), then \\(A^2-5A+6I\\) equals:",opts:["\\(A\\)","\\(I\\)","\\(O\\) (zero matrix)","\\(5A\\)"],ans:2,sol:"By Cayley–Hamilton, A satisfies its own characteristic equation: A²−5A+6I=O."},
+  {q:"The series \\(\\sum_{n=1}^\\infty \\frac{1}{n^2}\\) converges to:",opts:["1","\\(\\pi^2/6\\)","\\(\\pi^2/4\\)","\\(2\\)"],ans:1,sol:"Basel problem: Σ1/n²=π²/6."},
+  {q:"A bounded monotone sequence in \\(\\mathbb{R}\\):",opts:["Always diverges","Always converges","May or may not converge","Converges iff it's increasing"],ans:1,sol:"Monotone Convergence Theorem: bounded + monotone ⟹ convergent."},
+];
+let mockState={active:false,answers:[],idx:0,start:0,part:''};
+function startMock(part){
+  mockState={active:true,answers:[],idx:0,start:Date.now(),part,qs:MOCK_QUESTIONS,score:null};
+  renderMockQ();
+}
+function renderMockQ(){
+  const area=document.getElementById('mock-area');
+  if(mockState.idx>=mockState.qs.length){showMockResult();return;}
+  const q=mockState.qs[mockState.idx];
+  const elapsed=Math.floor((Date.now()-mockState.start)/1000);
+  area.innerHTML=`<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;max-width:640px;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:16px;">
+      <span class="mono" style="font-size:.75rem;color:var(--ink3);">Question ${mockState.idx+1} of ${mockState.qs.length}</span>
+      <span class="mono" style="font-size:.75rem;color:var(--ink3);">Time: ${elapsed}s</span>
+    </div>
+    <div class="problem-q" style="margin-bottom:18px;">${q.q}</div>
+    ${q.opts.map((o,i)=>`<div style="margin-bottom:10px;"><label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:.9rem;color:var(--ink2);">
+      <input type="radio" name="mq" value="${i}" style="margin-top:3px;"> ${o}
+    </label></div>`).join('')}
+    <button class="start-btn" style="max-width:160px;margin-top:12px;" onclick="submitMockQ()">Next →</button>
+  </div>`;
+  setTimeout(renderMath,80);
+}
+function submitMockQ(){
+  const sel=document.querySelector('input[name="mq"]:checked');
+  const ans=sel?parseInt(sel.value):-1;
+  mockState.answers.push(ans);
+  mockState.idx++;
+  renderMockQ();
+}
+function showMockResult(){
+  const score=mockState.answers.filter((a,i)=>a===mockState.qs[i].ans).length;
+  const total=mockState.qs.length;
+  const pct=Math.round(score/total*100);
+  const area=document.getElementById('mock-area');
+  area.innerHTML=`<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;max-width:640px;">
+    <h3 class="serif" style="margin-bottom:12px;">Result: ${score}/${total} (${pct}%)</h3>
+    <div style="margin-bottom:20px;"><div class="wt-bar" style="width:${pct*3}px;height:10px;"></div></div>
+    ${mockState.qs.map((q,i)=>{
+      const correct=mockState.answers[i]===q.ans;
+      return `<div style="margin-bottom:12px;padding:12px;background:var(--${correct?'green':'red'}-soft);border-radius:6px;border:1px solid var(--${correct?'green':'red'});">
+        <div style="font-size:.85rem;color:var(--ink);margin-bottom:4px;">Q${i+1}: ${correct?'✅ Correct':'❌ Wrong'}</div>
+        <div style="font-size:.8rem;color:var(--ink2);">${q.sol}</div>
+      </div>`;
+    }).join('')}
+    <button class="start-btn" onclick="startMock('${mockState.part}')" style="margin-top:8px;">Retry</button>
+  </div>`;
+  setTimeout(renderMath,100);
+}
+
+/* ============================================================
+   SEARCH
+============================================================ */
+const SEARCH_INDEX=[];
+TOPICS.forEach(t=>{
+  SEARCH_INDEX.push({type:'topic',label:t.name,tid:t.id,text:t.name+' '+t.desc});
+  t.units.forEach(u=>{
+    SEARCH_INDEX.push({type:'unit',label:`${t.name} → ${u.name}`,tid:t.id,uid:u.id,text:u.name+' '+t.name});
+  });
+});
+const KWORDS=['Cayley-Hamilton','Rank-Nullity','Lagrange','Sylow','Residue','Jordan Form','Metric Space',
+  'Cauchy','Hahn-Banach','Compact','Riemann','Spectral Theorem','Frobenius','Laurent','Holomorphic'];
+KWORDS.forEach(k=>{
+  const t=TOPICS.find(t=>t.name.toLowerCase().includes(k.toLowerCase().split(' ')[0]));
+  if(t) SEARCH_INDEX.push({type:'keyword',label:`🔑 ${k}`,tid:t.id,text:k});
+});
+
+function escapeRegex(str){
+  return str.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+}
+function highlightText(text, query){
+  const q = String(query||'').trim();
+  if(!q) return text;
+  const regex = new RegExp(`(${escapeRegex(q)})`, 'gi');
+  return text.replace(regex, '<mark>$1</mark>');
+}
+
+function doSearch(q){
+  const box=document.getElementById('search-results');
+  if(!q.trim()){box.style.display='none';return;}
+  const ql=q.toLowerCase();
+  const results=SEARCH_INDEX.filter(s=>s.text.toLowerCase().includes(ql)).slice(0,8);
+  if(!results.length){box.style.display='none';return;}
+  box.style.display='block';
+  box.innerHTML=results.map(r=>`<div class="sr-item" onclick="searchGo('${r.tid}','${r.uid||''}')">
+    <div class="sr-topic">${r.type.toUpperCase()}</div>
+    <div class="sr-title">${highlightText(r.label,q)}</div>
+  </div>`).join('');
+}
+function searchGo(tid, uid){
+  document.getElementById('search-results').style.display='none';
+  document.getElementById('search-box').value='';
+  showTopic(tid, uid);
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))document.getElementById('search-results').style.display='none';});
+
+/* ============================================================
+   THEME
+============================================================ */
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  document.getElementById('theme-btn').textContent=document.body.classList.contains('light')?'☀️':'🌙';
+}
+
+/* ============================================================
+   KATEX RENDER
+============================================================ */
+function renderMath(){
+  if(window.renderMathInElement){
+    try{
+      renderMathInElement(document.body,{
+        delimiters:[
+          {left:"\\[",right:"\\]",display:true},
+          {left:"\\(",right:"\\)",display:false},
+        ],
+        throwOnError:false,
+      });
+    }catch(e){}
+  }
+}
+window.addEventListener('load',()=>{setTimeout(renderMath,200);});
+</script>
+</body>
+</html>
