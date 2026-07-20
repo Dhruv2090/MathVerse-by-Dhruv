@@ -51,7 +51,8 @@ a{color:var(--accent);text-decoration:none;}
 #search-box:focus{border-color:var(--accent);width:260px;transition:width .2s;}
 .topbar-btn{background:none;border:1px solid var(--border2);color:var(--ink2);border-radius:6px;padding:6px 12px;font-size:.78rem;cursor:pointer;white-space:nowrap;}
 .topbar-btn:hover{border-color:var(--accent);color:var(--accent);}
-#back-btn{display:none;}
+#back-btn{display:none;align-items:center;gap:6px;background:var(--bg3);border-color:var(--accent);color:var(--accent);font-weight:600;}
+#back-btn:hover{background:var(--accent);color:#fff;}
 #theme-btn{font-size:16px;}
 
 /* ===== SIDEBAR ===== */
@@ -283,6 +284,9 @@ a{color:var(--accent);text-decoration:none;}
 .lib-hero-icon{font-size:3rem;flex:none;}
 .lib-hero h2{font-size:1.5rem;font-weight:600;margin-bottom:6px;}
 .lib-hero p{font-size:.88rem;color:var(--ink2);}
+.lib-search-row{display:flex;gap:10px;align-items:center;margin-bottom:18px;}
+.lib-search-input{flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--ink);border-radius:20px;padding:8px 18px;font-size:.83rem;outline:none;font-family:'Inter',sans-serif;}
+.lib-search-input:focus{border-color:var(--accent);}
 .lib-topic-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
 .lib-tab{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:7px 14px;border:1px solid var(--border2);border-radius:20px;cursor:pointer;color:var(--ink3);background:var(--bg2);transition:all .12s;white-space:nowrap;}
 .lib-tab:hover{border-color:var(--accent);color:var(--accent);}
@@ -292,65 +296,70 @@ a{color:var(--accent);text-decoration:none;}
 .lib-section-head .lsh-icon{font-size:1.3rem;}
 .lib-section-head h3{font-size:1.15rem;font-weight:600;}
 .lib-section-head .lsh-count{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--ink3);background:var(--bg3);padding:3px 8px;border-radius:10px;}
-.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
-.book-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .15s,transform .15s;}
-.book-card:hover{border-color:var(--accent);transform:translateY(-2px);}
-.book-spine{height:6px;}
-.book-body{padding:16px;}
-.book-title{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.4;}
-.book-author{font-size:.78rem;color:var(--accent);margin-bottom:8px;}
-.book-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
-.book-tag{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:2px 7px;border-radius:3px;}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+
+/* Professional Book Card */
+.book-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .18s,transform .18s,box-shadow .18s;display:flex;flex-direction:column;}
+.book-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px rgba(108,99,255,.15);}
+.book-card-top{display:flex;gap:16px;padding:18px 18px 14px;}
+.book-cover-wrap{flex:none;width:72px;height:96px;border-radius:6px;overflow:hidden;border:1px solid var(--border2);background:var(--bg3);display:flex;align-items:center;justify-content:center;}
+.book-cover-wrap img{width:100%;height:100%;object-fit:cover;}
+.book-cover-placeholder{font-size:2rem;text-align:center;}
+.book-info{flex:1;min-width:0;}
+.book-title{font-family:'Newsreader',serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.35;}
+.book-author{font-size:.78rem;color:var(--accent);margin-bottom:8px;font-weight:500;}
+.book-desc{font-size:.79rem;color:var(--ink3);line-height:1.55;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.book-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.book-tag{font-family:'JetBrains Mono',monospace;font-size:.58rem;padding:2px 7px;border-radius:3px;letter-spacing:.04em;text-transform:uppercase;}
 .book-tag.must{background:var(--red-soft);color:var(--red);}
 .book-tag.rec{background:var(--gold-soft);color:var(--gold);}
 .book-tag.ref{background:var(--blue-soft);color:var(--blue);}
 .book-tag.supp{background:var(--bg3);color:var(--ink3);}
-.book-desc{font-size:.8rem;color:var(--ink3);line-height:1.5;margin-bottom:12px;}
-.book-footer{border-top:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px;}
-.book-pdf-status{font-size:.75rem;display:flex;align-items:center;gap:5px;}
-.book-pdf-status.uploaded{color:var(--green);}
-.book-pdf-status.missing{color:var(--ink3);}
-.book-actions{display:flex;gap:6px;}
-.book-btn{font-family:'JetBrains Mono',monospace;font-size:.65rem;padding:5px 10px;border-radius:4px;cursor:pointer;border:1px solid;transition:all .12s;}
-.book-btn.upload{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);}
-.book-btn.upload:hover{background:var(--accent);color:#fff;}
-.book-btn.open{border-color:var(--green);color:var(--green);background:var(--green-soft);}
-.book-btn.open:hover{background:var(--green);color:#fff;}
-.book-btn.remove{border-color:var(--red);color:var(--red);background:var(--red-soft);}
-.book-btn.remove:hover{background:var(--red);color:#fff;}
-/* Upload zone */
-.upload-zone{border:2px dashed var(--border2);border-radius:var(--radius);padding:32px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;margin-bottom:20px;}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:var(--accent-soft);}
-.upload-zone .uz-icon{font-size:2.5rem;margin-bottom:10px;}
-.upload-zone p{font-size:.88rem;color:var(--ink2);margin-bottom:4px;}
-.upload-zone small{font-size:.75rem;color:var(--ink3);}
-#lib-file-input{display:none;}
-/* PDF Viewer Modal */
-#pdf-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;flex-direction:column;}
-#pdf-modal.open{display:flex;}
-#pdf-modal-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex:none;}
-#pdf-modal-title{font-size:.95rem;font-weight:600;}
-#pdf-modal-close{background:var(--red-soft);border:1px solid var(--red);color:var(--red);border-radius:6px;padding:6px 14px;cursor:pointer;font-size:.8rem;}
-#pdf-frame{flex:1;border:none;background:#fff;}
-/* Storage stats bar */
-.storage-bar-wrap{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:16px;}
-.storage-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink3);min-width:80px;}
-.storage-track{flex:1;height:8px;background:var(--border2);border-radius:4px;overflow:hidden;}
-.storage-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .4s;}
-.storage-pct{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink2);min-width:40px;text-align:right;}
-/* Upload modal */
-#upload-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:400;align-items:center;justify-content:center;}
-#upload-modal.open{display:flex;}
-.upload-modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:28px;width:440px;max-width:95vw;}
-.upload-modal-box h3{margin-bottom:6px;font-size:1.1rem;}
-.upload-modal-box p{font-size:.84rem;color:var(--ink2);margin-bottom:18px;}
-.umbox-book-info{background:var(--bg3);border-radius:6px;padding:12px 14px;margin-bottom:16px;}
-.umbox-book-title{font-weight:600;font-size:.92rem;margin-bottom:2px;}
-.umbox-book-author{font-size:.78rem;color:var(--accent);}
-.um-btn-row{display:flex;gap:10px;margin-top:18px;}
-.um-btn{flex:1;padding:10px;border-radius:6px;cursor:pointer;font-size:.85rem;font-weight:500;border:none;}
-.um-btn.primary{background:var(--accent);color:#fff;}
-.um-btn.secondary{background:var(--bg3);border:1px solid var(--border2);color:var(--ink2);}
+.book-tag.subj{background:var(--accent-soft);color:var(--accent);}
+.book-meta-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 10px;}
+.book-meta-chip{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink3);background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 8px;}
+.book-footer{border-top:1px solid var(--border);padding:12px 18px;display:flex;gap:8px;margin-top:auto;}
+.book-btn{font-family:'JetBrains Mono',monospace;font-size:.68rem;padding:7px 14px;border-radius:5px;cursor:pointer;border:1px solid;transition:all .14s;flex:1;text-align:center;font-weight:500;}
+.book-btn.view{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);}
+.book-btn.view:hover{background:var(--accent);color:#fff;}
+.book-btn.download{border-color:var(--green);color:var(--green);background:var(--green-soft);}
+.book-btn.download:hover{background:var(--green);color:#fff;}
+.book-btn.disabled{border-color:var(--border2);color:var(--ink3);background:var(--bg3);cursor:default;pointer-events:none;opacity:.55;}
+.no-results{padding:40px;text-align:center;color:var(--ink3);font-size:.88rem;}
+
+/* ===== HANDWRITTEN NOTES PAGE ===== */
+.notes-hero{background:linear-gradient(135deg,var(--green-soft) 0%,var(--bg3) 100%);border:1px solid var(--green);border-radius:var(--radius);padding:28px 32px;margin-bottom:28px;display:flex;align-items:center;gap:24px;}
+.notes-hero-icon{font-size:3rem;flex:none;}
+.notes-hero h2{font-size:1.5rem;font-weight:600;margin-bottom:6px;}
+.notes-hero p{font-size:.88rem;color:var(--ink2);}
+.notes-topic-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.notes-tab{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:7px 14px;border:1px solid var(--border2);border-radius:20px;cursor:pointer;color:var(--ink3);background:var(--bg2);transition:all .12s;white-space:nowrap;}
+.notes-tab:hover{border-color:var(--green);color:var(--green);}
+.notes-tab.active{background:var(--green);border-color:var(--green);color:#fff;}
+.notes-section{margin-bottom:36px;}
+.notes-section-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--green-soft);}
+.notes-section-head h3{font-size:1.1rem;font-weight:600;}
+.notes-section-head .nsh-count{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--ink3);background:var(--bg3);padding:3px 8px;border-radius:10px;}
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+
+/* Note Card */
+.note-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .18s,transform .18s,box-shadow .18s;display:flex;flex-direction:column;}
+.note-card:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 6px 20px rgba(76,175,130,.12);}
+.note-card-accent{height:4px;background:linear-gradient(90deg,var(--green),var(--accent));}
+.note-card-body{padding:16px;flex:1;}
+.note-title{font-family:'Newsreader',serif;font-size:.97rem;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.35;}
+.note-desc{font-size:.79rem;color:var(--ink3);line-height:1.55;margin-bottom:10px;}
+.note-topic-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:2px 8px;border-radius:3px;background:var(--green-soft);color:var(--green);border:1px solid var(--green);display:inline-block;margin-bottom:6px;}
+.note-card-footer{border-top:1px solid var(--border);padding:10px 16px;display:flex;gap:8px;}
+.note-btn{font-family:'JetBrains Mono',monospace;font-size:.66rem;padding:7px 12px;border-radius:5px;cursor:pointer;border:1px solid;transition:all .14s;flex:1;text-align:center;font-weight:500;}
+.note-btn.view{border-color:var(--green);color:var(--green);background:var(--green-soft);}
+.note-btn.view:hover{background:var(--green);color:#fff;}
+.note-btn.download{border-color:var(--blue);color:var(--blue);background:var(--blue-soft);}
+.note-btn.download:hover{background:var(--blue);color:#fff;}
+.note-btn.disabled{border-color:var(--border2);color:var(--ink3);background:var(--bg3);cursor:default;pointer-events:none;opacity:.55;}
+.notes-search-row{display:flex;gap:10px;align-items:center;margin-bottom:18px;}
+.notes-search-input{flex:1;background:var(--bg3);border:1px solid var(--border2);color:var(--ink);border-radius:20px;padding:8px 18px;font-size:.83rem;outline:none;font-family:'Inter',sans-serif;}
+.notes-search-input:focus{border-color:var(--green);}
 
 /* Light mode */
 body.light{
@@ -377,6 +386,7 @@ body.light{
     <div class="sb-footer-btn" onclick="showPage('study-plan')">📅 Plan</div>
     <div class="sb-footer-btn" onclick="showPage('progress')">📈 Progress</div>
     <div class="sb-footer-btn" onclick="showPage('books')" style="border-color:var(--gold);color:var(--gold);">📚 Books</div>
+    <div class="sb-footer-btn" onclick="showPage('notes')" style="border-color:var(--green);color:var(--green);">📝 Notes</div>
   </div>
 </nav>
 
@@ -385,7 +395,7 @@ body.light{
   <div id="topbar">
     <div class="topbar-left">
       <button id="menu-btn" onclick="toggleSidebar()">☰</button>
-      <button class="topbar-btn" id="back-btn" onclick="goBack()">← Back</button>
+      <button class="topbar-btn" id="back-btn" onclick="goBack()" title="Go back">← Back</button>
       <span id="breadcrumb">home</span>
     </div>
     <div class="topbar-right">
@@ -397,6 +407,7 @@ body.light{
       <button class="topbar-btn" onclick="showPage('handbook')">📄 Formulas</button>
       <button class="topbar-btn" onclick="showPage('mock-tests')">📝 Mock Tests</button>
       <button class="topbar-btn" onclick="showPage('books')" style="border-color:var(--gold);color:var(--gold);">📚 Books</button>
+      <button class="topbar-btn" onclick="showPage('notes')" style="border-color:var(--green);color:var(--green);">📝 Notes</button>
       <button class="topbar-btn" id="theme-btn" onclick="toggleTheme()">🌙</button>
     </div>
   </div>
@@ -520,80 +531,72 @@ body.light{
         <div class="lib-hero-icon">📚</div>
         <div>
           <h2 class="serif">Reference Books Library</h2>
-          <p>Sabhi topics ki important books — standard references, PDFs upload karo aur browser mein padho. IndexedDB se PDFs offline bhi available rehti hain.</p>
+          <p>Curated standard references for all CSIR NET topics — view or download directly via the buttons below.</p>
         </div>
       </div>
 
-      <!-- Storage bar -->
-      <div class="storage-bar-wrap">
-        <span class="storage-label">Storage</span>
-        <div class="storage-track"><div class="storage-fill" id="storage-fill" style="width:0%"></div></div>
-        <span class="storage-pct" id="storage-pct">0 MB</span>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--ink3);">/ Browser Storage</span>
-        <button class="book-btn ref" onclick="showPage('books')" style="font-size:.65rem;padding:5px 10px;border-radius:4px;cursor:pointer;">↺ Refresh</button>
+      <!-- Search -->
+      <div class="lib-search-row">
+        <input class="lib-search-input" type="text" id="lib-search" placeholder="🔍  Search books by title, author, subject…" oninput="filterBooks(currentBookTab, null, this.value)">
       </div>
 
       <!-- Topic filter tabs -->
       <div class="lib-topic-tabs" id="lib-topic-tabs">
-        <span class="lib-tab active" onclick="filterBooks('all',this)">📖 All Books</span>
-        <span class="lib-tab" onclick="filterBooks('la',this)">Linear Algebra</span>
-        <span class="lib-tab" onclick="filterBooks('ra',this)">Real Analysis</span>
-        <span class="lib-tab" onclick="filterBooks('ca',this)">Complex Analysis</span>
-        <span class="lib-tab" onclick="filterBooks('aa',this)">Abstract Algebra</span>
-        <span class="lib-tab" onclick="filterBooks('de',this)">ODE / PDE</span>
-        <span class="lib-tab" onclick="filterBooks('calc',this)">Calculus</span>
-        <span class="lib-tab" onclick="filterBooks('top',this)">Topology</span>
-        <span class="lib-tab" onclick="filterBooks('na',this)">Numerical</span>
-        <span class="lib-tab" onclick="filterBooks('ie',this)">Integral Eq.</span>
-        <span class="lib-tab" onclick="filterBooks('cm',this)">Mechanics</span>
-        <span class="lib-tab" onclick="filterBooks('uploaded',this)">✅ Uploaded</span>
+        <span class="lib-tab active" data-tid="all" onclick="filterBooks('all',this)">📖 All Books</span>
+        <span class="lib-tab" data-tid="la" onclick="filterBooks('la',this)">Linear Algebra</span>
+        <span class="lib-tab" data-tid="ra" onclick="filterBooks('ra',this)">Real Analysis</span>
+        <span class="lib-tab" data-tid="ca" onclick="filterBooks('ca',this)">Complex Analysis</span>
+        <span class="lib-tab" data-tid="aa" onclick="filterBooks('aa',this)">Abstract Algebra</span>
+        <span class="lib-tab" data-tid="de" onclick="filterBooks('de',this)">ODE / PDE</span>
+        <span class="lib-tab" data-tid="calc" onclick="filterBooks('calc',this)">Calculus</span>
+        <span class="lib-tab" data-tid="top" onclick="filterBooks('top',this)">Topology</span>
+        <span class="lib-tab" data-tid="na" onclick="filterBooks('na',this)">Numerical</span>
+        <span class="lib-tab" data-tid="ie" onclick="filterBooks('ie',this)">Integral Eq.</span>
+        <span class="lib-tab" data-tid="cm" onclick="filterBooks('cm',this)">Mechanics</span>
       </div>
 
       <!-- Books grid -->
       <div id="lib-books-container"></div>
     </div>
-  </div>
-</div>
-</div>
 
-<!-- ===== PDF VIEWER MODAL ===== -->
-<div id="pdf-modal">
-  <div id="pdf-modal-header">
-    <span id="pdf-modal-title">Book Title</span>
-    <button id="pdf-modal-close" onclick="closePDFViewer()">✕ Close</button>
-  </div>
-  <iframe id="pdf-frame" src=""></iframe>
-</div>
-
-<!-- ===== UPLOAD MODAL ===== -->
-<div id="upload-modal">
-  <div class="upload-modal-box">
-    <h3 class="serif">📤 Upload PDF</h3>
-    <p>Is book ke liye apna PDF select karo — browser storage mein save ho jayega.</p>
-    <div class="umbox-book-info">
-      <div class="umbox-book-title" id="um-book-title">—</div>
-      <div class="umbox-book-author" id="um-book-author">—</div>
-    </div>
-    <div class="upload-zone" id="um-dropzone" onclick="document.getElementById('lib-file-input').click()"
-         ondragover="event.preventDefault();this.classList.add('drag')"
-         ondragleave="this.classList.remove('drag')"
-         ondrop="handleFileDrop(event)">
-      <div class="uz-icon">📄</div>
-      <p>Click karo ya PDF yahan drag karo</p>
-      <small>Maximum size: 50 MB · Format: PDF only</small>
-    </div>
-    <input type="file" id="lib-file-input" accept=".pdf,application/pdf" onchange="handleFileSelect(event)">
-    <div id="um-progress" style="display:none;margin-bottom:12px;">
-      <div style="font-size:.82rem;color:var(--ink2);margin-bottom:6px;" id="um-progress-text">Uploading...</div>
-      <div style="height:6px;background:var(--border2);border-radius:3px;overflow:hidden;">
-        <div id="um-progress-fill" style="height:100%;background:var(--accent);border-radius:3px;width:0%;transition:width .3s;"></div>
+    <!-- ===== HANDWRITTEN NOTES PAGE ===== -->
+    <div class="page" id="page-notes">
+      <div class="notes-hero">
+        <div class="notes-hero-icon">📝</div>
+        <div>
+          <h2 class="serif">Handwritten Notes</h2>
+          <p>Topic-wise handwritten notes — view in browser or download PDF for offline study.</p>
+        </div>
       </div>
-    </div>
-    <div class="um-btn-row">
-      <button class="um-btn secondary" onclick="closeUploadModal()">Cancel</button>
+
+      <!-- Search -->
+      <div class="notes-search-row">
+        <input class="notes-search-input" type="text" id="notes-search" placeholder="🔍  Search notes by title, topic…" oninput="filterNotes(currentNotesTab, null, this.value)">
+      </div>
+
+      <!-- Topic filter tabs -->
+      <div class="notes-topic-tabs" id="notes-topic-tabs">
+        <span class="notes-tab active" data-ntid="all" onclick="filterNotes('all',this)">📝 All Notes</span>
+        <span class="notes-tab" data-ntid="la" onclick="filterNotes('la',this)">Linear Algebra</span>
+        <span class="notes-tab" data-ntid="ra" onclick="filterNotes('ra',this)">Real Analysis</span>
+        <span class="notes-tab" data-ntid="ca" onclick="filterNotes('ca',this)">Complex Analysis</span>
+        <span class="notes-tab" data-ntid="aa" onclick="filterNotes('aa',this)">Abstract Algebra</span>
+        <span class="notes-tab" data-ntid="top" onclick="filterNotes('top',this)">Topology</span>
+        <span class="notes-tab" data-ntid="de" onclick="filterNotes('de',this)">ODE & PDE</span>
+        <span class="notes-tab" data-ntid="calc" onclick="filterNotes('calc',this)">Calculus</span>
+        <span class="notes-tab" data-ntid="ie" onclick="filterNotes('ie',this)">Integral Equations</span>
+        <span class="notes-tab" data-ntid="na" onclick="filterNotes('na',this)">Numerical Analysis</span>
+        <span class="notes-tab" data-ntid="cm" onclick="filterNotes('cm',this)">Classical Mechanics</span>
+      </div>
+
+      <!-- Notes grid -->
+      <div id="notes-container"></div>
     </div>
   </div>
 </div>
+</div>
+
+<!-- PDF modals removed — books now use direct OneDrive links -->
 
 <script>
 /* ============================================================
@@ -1211,6 +1214,7 @@ function showPage(id, skipHistory=false){
   if(id==='bookmarks') renderBookmarks();
   if(id==='study-plan') showPlan(60);
   if(id==='books') renderBooksPage();
+  if(id==='notes') renderNotesPage();
   if(!skipHistory){
     window.history.pushState({type:'page',id}, '', `#page-${id}`);
   }
@@ -1246,15 +1250,17 @@ function updateActiveSb(tid){
 
 function updateBackButton(){
   const btn=document.getElementById('back-btn');
-  if(window.history.state || window.location.hash){
-    btn.style.display='inline-flex';
-  } else {
-    btn.style.display='none';
-  }
+  const hasDeepView = !!(window.history.state || window.location.hash);
+  const isHomeView = !hasDeepView || window.location.hash === '' || window.location.hash === '#page-home' || window.location.hash === '#home';
+  btn.style.display = isHomeView ? 'none' : 'inline-flex';
 }
 
 function goBack(){
-  window.history.back();
+  if(window.history.length > 1){
+    window.history.back();
+  } else {
+    showPage('home', true);
+  }
 }
 
 window.addEventListener('popstate', event=>{
@@ -1595,236 +1601,606 @@ function toggleTheme(){
 
 /* ============================================================
    BOOKS LIBRARY — DATA
+   (Admin: edit the BOOKS_DATA array below to add/update books)
+   Each object requires:
+     title, author, description, cover, viewLink, downloadLink,
+     subject, edition, size, topic (la|ra|ca|aa|de|calc|top|na|ie|cm), tags[]
 ============================================================ */
 const BOOKS_DATA = [
   /* ---- LINEAR ALGEBRA ---- */
-  {id:"b-la-1", topic:"la", title:"Linear Algebra", author:"Hoffman & Kunze", edition:"2nd Ed.", tags:["must"], color:"#6C63FF",
-   desc:"CSIR NET ka sabse important reference. Abstract treatment with rigorous proofs — canonical forms, inner product spaces, spectral theorem — sab covered."},
-  {id:"b-la-2", topic:"la", title:"Linear Algebra Done Right", author:"Sheldon Axler", edition:"3rd Ed.", tags:["must"], color:"#6C63FF",
-   desc:"Determinant-free approach — intuition build karne ke liye best. Eigenvalues aur operators ka elegant treatment."},
-  {id:"b-la-3", topic:"la", title:"Introduction to Linear Algebra", author:"Gilbert Strang", edition:"5th Ed.", tags:["rec"], color:"#4A9EDE",
-   desc:"Applied perspective with strong geometric intuition. SVD, projections, and applications — excellent for conceptual clarity."},
-  {id:"b-la-4", topic:"la", title:"Matrix Analysis", author:"Horn & Johnson", edition:"2nd Ed.", tags:["ref"], color:"#4A9EDE",
-   desc:"Advanced reference for spectral theory, norms, and matrix functions. Use selectively for Part C prep."},
-  {id:"b-la-5", topic:"la", title:"Linear Algebra", author:"S. Lang", edition:"3rd Ed.", tags:["supp"], color:"#7A788C",
-   desc:"Concise and abstract. Good for quick theorem statements and proofs when revising."},
+  {
+    id:"b-la-1", topic:"la", subject:"Linear Algebra",
+    title:"Linear Algebra",
+    author:"Hoffman & Kunze",
+    edition:"2nd Edition",
+    size:"12.4 MB",
+    description:"CSIR NET ka sabse important reference. Abstract treatment with rigorous proofs — canonical forms, inner product spaces, spectral theorem — sab covered.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-la-2", topic:"la", subject:"Linear Algebra",
+    title:"Linear Algebra Done Right",
+    author:"Sheldon Axler",
+    edition:"3rd Edition",
+    size:"8.2 MB",
+    description:"Determinant-free approach — intuition build karne ke liye best. Eigenvalues aur operators ka elegant treatment.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-la-3", topic:"la", subject:"Linear Algebra",
+    title:"Introduction to Linear Algebra",
+    author:"Gilbert Strang",
+    edition:"5th Edition",
+    size:"15.6 MB",
+    description:"Applied perspective with strong geometric intuition. SVD, projections, and applications — excellent for conceptual clarity.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-la-4", topic:"la", subject:"Linear Algebra",
+    title:"Matrix Analysis",
+    author:"Horn & Johnson",
+    edition:"2nd Edition",
+    size:"19.1 MB",
+    description:"Advanced reference for spectral theory, norms, and matrix functions. Use selectively for Part C prep.",
+    cover:"",
+    tags:["ref"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-la-5", topic:"la", subject:"Linear Algebra",
+    title:"Linear Algebra",
+    author:"S. Lang",
+    edition:"3rd Edition",
+    size:"7.8 MB",
+    description:"Concise and abstract. Good for quick theorem statements and proofs when revising.",
+    cover:"",
+    tags:["supp"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- REAL ANALYSIS ---- */
-  {id:"b-ra-1", topic:"ra", title:"Principles of Mathematical Analysis", author:"Walter Rudin (Baby Rudin)", edition:"3rd Ed.", tags:["must"], color:"#E05C6A",
-   desc:"The gold standard. Metric spaces, sequences, continuity, integration — all in rigorous ε-δ style. CSIR aspirant ke liye mandatory."},
-  {id:"b-ra-2", topic:"ra", title:"Real Analysis", author:"H.L. Royden & P.M. Fitzpatrick", edition:"4th Ed.", tags:["must"], color:"#E05C6A",
-   desc:"Lebesgue integration, measure theory — essential for CSIR Part C. Topology aur functional analysis ka bridge."},
-  {id:"b-ra-3", topic:"ra", title:"Introduction to Real Analysis", author:"Bartle & Sherbert", edition:"4th Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Easier entry point than Rudin. Clear proofs and good exercises — start yahan karo phir Rudin pe jao."},
-  {id:"b-ra-4", topic:"ra", title:"Real Analysis", author:"S.K. Mapa", edition:"Latest", tags:["rec"], color:"#D4A843",
-   desc:"Indian author — syllabus ke anusaar content. Uniform convergence, metric spaces — CSIR pattern mein helpful."},
-  {id:"b-ra-5", topic:"ra", title:"Real Analysis", author:"G.F. Simmons", edition:"Latest", tags:["supp"], color:"#7A788C",
-   desc:"Readable and motivating. Good for building intuition before attacking Rudin."},
+  {
+    id:"b-ra-1", topic:"ra", subject:"Real Analysis",
+    title:"Principles of Mathematical Analysis",
+    author:"Walter Rudin",
+    edition:"3rd Edition",
+    size:"11.3 MB",
+    description:"The gold standard. Metric spaces, sequences, continuity, integration — all in rigorous ε-δ style. CSIR aspirant ke liye mandatory.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ra-2", topic:"ra", subject:"Real Analysis",
+    title:"Real Analysis",
+    author:"H.L. Royden & P.M. Fitzpatrick",
+    edition:"4th Edition",
+    size:"16.8 MB",
+    description:"Lebesgue integration, measure theory — essential for CSIR Part C. Topology aur functional analysis ka bridge.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ra-3", topic:"ra", subject:"Real Analysis",
+    title:"Introduction to Real Analysis",
+    author:"Bartle & Sherbert",
+    edition:"4th Edition",
+    size:"9.4 MB",
+    description:"Easier entry point than Rudin. Clear proofs and good exercises — start yahan karo phir Rudin pe jao.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ra-4", topic:"ra", subject:"Real Analysis",
+    title:"Real Analysis",
+    author:"S.K. Mapa",
+    edition:"Latest Edition",
+    size:"6.1 MB",
+    description:"Indian author — syllabus ke anusaar content. Uniform convergence, metric spaces — CSIR pattern mein helpful.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ra-5", topic:"ra", subject:"Real Analysis",
+    title:"Real Analysis",
+    author:"G.F. Simmons",
+    edition:"Latest Edition",
+    size:"8.7 MB",
+    description:"Readable and motivating. Good for building intuition before attacking Rudin.",
+    cover:"",
+    tags:["supp"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- COMPLEX ANALYSIS ---- */
-  {id:"b-ca-1", topic:"ca", title:"Complex Analysis", author:"Lars Ahlfors", edition:"3rd Ed.", tags:["must"], color:"#4CAF82",
-   desc:"Classic reference. Riemann surfaces, conformal maps, Cauchy theory — highest level treatment. CSIR Part C ke liye essential."},
-  {id:"b-ca-2", topic:"ca", title:"Functions of One Complex Variable", author:"John B. Conway", edition:"2nd Ed.", tags:["must"], color:"#4CAF82",
-   desc:"Standard graduate text. Residues, Laurent series, argument principle — sab rigorous proofs ke saath."},
-  {id:"b-ca-3", topic:"ca", title:"Complex Variables and Applications", author:"Brown & Churchill", edition:"9th Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Application-oriented. Conformal mapping aur contour integration ke numerical examples bahut acche hain."},
-  {id:"b-ca-4", topic:"ca", title:"Complex Analysis", author:"T.W. Gamelin", edition:"Latest", tags:["rec"], color:"#D4A843",
-   desc:"Modern and readable. Good for Möbius transformations and harmonic functions."},
-  {id:"b-ca-5", topic:"ca", title:"Complex Analysis", author:"Ponnusamy & Silverman", edition:"Latest", tags:["supp"], color:"#7A788C",
-   desc:"Indian text covering CSIR syllabus explicitly. Good solved examples."},
+  {
+    id:"b-ca-1", topic:"ca", subject:"Complex Analysis",
+    title:"Complex Analysis",
+    author:"Lars Ahlfors",
+    edition:"3rd Edition",
+    size:"14.2 MB",
+    description:"Classic reference. Riemann surfaces, conformal maps, Cauchy theory — highest level treatment. CSIR Part C ke liye essential.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ca-2", topic:"ca", subject:"Complex Analysis",
+    title:"Functions of One Complex Variable",
+    author:"John B. Conway",
+    edition:"2nd Edition",
+    size:"12.9 MB",
+    description:"Standard graduate text. Residues, Laurent series, argument principle — sab rigorous proofs ke saath.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ca-3", topic:"ca", subject:"Complex Analysis",
+    title:"Complex Variables and Applications",
+    author:"Brown & Churchill",
+    edition:"9th Edition",
+    size:"10.3 MB",
+    description:"Application-oriented. Conformal mapping aur contour integration ke numerical examples bahut acche hain.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ca-4", topic:"ca", subject:"Complex Analysis",
+    title:"Complex Analysis",
+    author:"T.W. Gamelin",
+    edition:"Latest Edition",
+    size:"11.6 MB",
+    description:"Modern and readable. Good for Möbius transformations and harmonic functions.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ca-5", topic:"ca", subject:"Complex Analysis",
+    title:"Complex Analysis",
+    author:"Ponnusamy & Silverman",
+    edition:"Latest Edition",
+    size:"9.8 MB",
+    description:"Indian text covering CSIR syllabus explicitly. Good solved examples.",
+    cover:"",
+    tags:["supp"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- ABSTRACT ALGEBRA ---- */
-  {id:"b-aa-1", topic:"aa", title:"Abstract Algebra", author:"Dummit & Foote", edition:"3rd Ed.", tags:["must"], color:"#B46EDE",
-   desc:"The most comprehensive text. Groups, rings, fields, Galois theory — everything with proofs and rich exercises. CSIR ka ultimate reference."},
-  {id:"b-aa-2", topic:"aa", title:"Algebra", author:"Michael Artin", edition:"2nd Ed.", tags:["must"], color:"#B46EDE",
-   desc:"Geometric and linear algebra flavor. Sylow theorems, group actions — very intuitive treatment."},
-  {id:"b-aa-3", topic:"aa", title:"Topics in Algebra", author:"I.N. Herstein", edition:"2nd Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Classic Indian curriculum text. Excellent problems — many CSIR PYQs are adapted from Herstein exercises."},
-  {id:"b-aa-4", topic:"aa", title:"A First Course in Abstract Algebra", author:"John Fraleigh", edition:"7th Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Beginner-friendly. Good for first exposure before Dummit & Foote."},
-  {id:"b-aa-5", topic:"aa", title:"Algebra", author:"Hungerford", edition:"Latest", tags:["ref"], color:"#4A9EDE",
-   desc:"Advanced graduate reference. Use for Galois theory and module theory."},
+  {
+    id:"b-aa-1", topic:"aa", subject:"Abstract Algebra",
+    title:"Abstract Algebra",
+    author:"Dummit & Foote",
+    edition:"3rd Edition",
+    size:"22.1 MB",
+    description:"The most comprehensive text. Groups, rings, fields, Galois theory — everything with proofs and rich exercises. CSIR ka ultimate reference.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-aa-2", topic:"aa", subject:"Abstract Algebra",
+    title:"Algebra",
+    author:"Michael Artin",
+    edition:"2nd Edition",
+    size:"13.4 MB",
+    description:"Geometric and linear algebra flavor. Sylow theorems, group actions — very intuitive treatment.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-aa-3", topic:"aa", subject:"Abstract Algebra",
+    title:"Topics in Algebra",
+    author:"I.N. Herstein",
+    edition:"2nd Edition",
+    size:"10.2 MB",
+    description:"Classic Indian curriculum text. Excellent problems — many CSIR PYQs are adapted from Herstein exercises.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-aa-4", topic:"aa", subject:"Abstract Algebra",
+    title:"A First Course in Abstract Algebra",
+    author:"John Fraleigh",
+    edition:"7th Edition",
+    size:"11.8 MB",
+    description:"Beginner-friendly. Good for first exposure before Dummit & Foote.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-aa-5", topic:"aa", subject:"Abstract Algebra",
+    title:"Algebra",
+    author:"Hungerford",
+    edition:"Latest Edition",
+    size:"17.3 MB",
+    description:"Advanced graduate reference. Use for Galois theory and module theory.",
+    cover:"",
+    tags:["ref"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- ODE / PDE ---- */
-  {id:"b-de-1", topic:"de", title:"Ordinary Differential Equations", author:"Earl A. Coddington", edition:"Dover Ed.", tags:["must"], color:"#DE8F4A",
-   desc:"Rigorous treatment of existence/uniqueness, linear systems, Sturm–Liouville. Essential for CSIR ODE questions."},
-  {id:"b-de-2", topic:"de", title:"Differential Equations", author:"S.L. Ross", edition:"3rd Ed.", tags:["must"], color:"#DE8F4A",
-   desc:"Standard text with excellent solved examples. First/second order, series solutions — very CSIR-friendly."},
-  {id:"b-de-3", topic:"de", title:"Partial Differential Equations", author:"Lawrence Evans", edition:"2nd Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Advanced PDE reference. Wave, heat, Laplace equations with functional analytic tools."},
-  {id:"b-de-4", topic:"de", title:"Partial Differential Equations", author:"I.N. Sneddon", edition:"Dover Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Classical approach — separation of variables, Fourier methods. Good for CSIR PDE questions."},
+  {
+    id:"b-de-1", topic:"de", subject:"ODE & PDE",
+    title:"Ordinary Differential Equations",
+    author:"Earl A. Coddington",
+    edition:"Dover Edition",
+    size:"9.6 MB",
+    description:"Rigorous treatment of existence/uniqueness, linear systems, Sturm–Liouville. Essential for CSIR ODE questions.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-de-2", topic:"de", subject:"ODE & PDE",
+    title:"Differential Equations",
+    author:"S.L. Ross",
+    edition:"3rd Edition",
+    size:"12.5 MB",
+    description:"Standard text with excellent solved examples. First/second order, series solutions — very CSIR-friendly.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-de-3", topic:"de", subject:"ODE & PDE",
+    title:"Partial Differential Equations",
+    author:"Lawrence Evans",
+    edition:"2nd Edition",
+    size:"18.4 MB",
+    description:"Advanced PDE reference. Wave, heat, Laplace equations with functional analytic tools.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-de-4", topic:"de", subject:"ODE & PDE",
+    title:"Partial Differential Equations",
+    author:"I.N. Sneddon",
+    edition:"Dover Edition",
+    size:"8.9 MB",
+    description:"Classical approach — separation of variables, Fourier methods. Good for CSIR PDE questions.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
 
-  /* ---- CALCULUS / MULTIVARIABLE ---- */
-  {id:"b-calc-1", topic:"calc", title:"Calculus on Manifolds", author:"Michael Spivak", edition:"Latest", tags:["must"], color:"#DE4A9E",
-   desc:"Rigorous multivariable analysis — inverse/implicit function theorems, differential forms. CSIR Part C prep."},
-  {id:"b-calc-2", topic:"calc", title:"Advanced Calculus", author:"R. Creighton Buck", edition:"3rd Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Vector calculus, Green's, Stokes', Divergence theorems — excellent for CSIR Calculus section."},
-  {id:"b-calc-3", topic:"calc", title:"Mathematical Analysis", author:"Tom Apostol", edition:"2nd Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Rigorous treatment of multivariable calculus and integration. Classic text."},
+  /* ---- CALCULUS ---- */
+  {
+    id:"b-calc-1", topic:"calc", subject:"Calculus",
+    title:"Calculus on Manifolds",
+    author:"Michael Spivak",
+    edition:"Latest Edition",
+    size:"7.4 MB",
+    description:"Rigorous multivariable analysis — inverse/implicit function theorems, differential forms. CSIR Part C prep.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-calc-2", topic:"calc", subject:"Calculus",
+    title:"Advanced Calculus",
+    author:"R. Creighton Buck",
+    edition:"3rd Edition",
+    size:"13.2 MB",
+    description:"Vector calculus, Green's, Stokes', Divergence theorems — excellent for CSIR Calculus section.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-calc-3", topic:"calc", subject:"Calculus",
+    title:"Mathematical Analysis",
+    author:"Tom Apostol",
+    edition:"2nd Edition",
+    size:"14.7 MB",
+    description:"Rigorous treatment of multivariable calculus and integration. Classic text.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- TOPOLOGY ---- */
-  {id:"b-top-1", topic:"top", title:"Topology", author:"James R. Munkres", edition:"2nd Ed.", tags:["must"], color:"#4ADEB4",
-   desc:"The definitive topology textbook. Point-set topology — compactness, connectedness, separation axioms. Every CSIR aspirant must read this."},
-  {id:"b-top-2", topic:"top", title:"Introduction to Topology", author:"Bert Mendelson", edition:"3rd Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Short and accessible. Good first topology book before Munkres."},
-  {id:"b-top-3", topic:"top", title:"General Topology", author:"Kelley", edition:"Dover Ed.", tags:["ref"], color:"#4A9EDE",
-   desc:"Advanced reference. Use for deeper separation axiom questions."},
+  {
+    id:"b-top-1", topic:"top", subject:"Topology",
+    title:"Topology",
+    author:"James R. Munkres",
+    edition:"2nd Edition",
+    size:"16.1 MB",
+    description:"The definitive topology textbook. Point-set topology — compactness, connectedness, separation axioms. Every CSIR aspirant must read this.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-top-2", topic:"top", subject:"Topology",
+    title:"Introduction to Topology",
+    author:"Bert Mendelson",
+    edition:"3rd Edition",
+    size:"5.8 MB",
+    description:"Short and accessible. Good first topology book before Munkres.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-top-3", topic:"top", subject:"Topology",
+    title:"General Topology",
+    author:"J.L. Kelley",
+    edition:"Dover Edition",
+    size:"11.2 MB",
+    description:"Advanced reference. Use for deeper separation axiom questions.",
+    cover:"",
+    tags:["ref"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- NUMERICAL ANALYSIS ---- */
-  {id:"b-na-1", topic:"na", title:"Numerical Analysis", author:"Burden & Faires", edition:"10th Ed.", tags:["must"], color:"#ADE04A",
-   desc:"Standard text — root finding, interpolation, numerical integration, ODE solvers. CSIR Numerical Analysis ke liye perfect."},
-  {id:"b-na-2", topic:"na", title:"Introductory Methods of Numerical Analysis", author:"S.S. Sastry", edition:"5th Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Indian text, widely used in Indian universities. Syllabus-aligned with good examples."},
-  {id:"b-na-3", topic:"na", title:"Numerical Methods for Scientists and Engineers", author:"R.W. Hamming", edition:"Dover Ed.", tags:["supp"], color:"#7A788C",
-   desc:"Classic. Good conceptual explanations of error analysis and convergence."},
+  {
+    id:"b-na-1", topic:"na", subject:"Numerical Analysis",
+    title:"Numerical Analysis",
+    author:"Burden & Faires",
+    edition:"10th Edition",
+    size:"20.3 MB",
+    description:"Standard text — root finding, interpolation, numerical integration, ODE solvers. CSIR Numerical Analysis ke liye perfect.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-na-2", topic:"na", subject:"Numerical Analysis",
+    title:"Introductory Methods of Numerical Analysis",
+    author:"S.S. Sastry",
+    edition:"5th Edition",
+    size:"9.6 MB",
+    description:"Indian text, widely used in Indian universities. Syllabus-aligned with good examples.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-na-3", topic:"na", subject:"Numerical Analysis",
+    title:"Numerical Methods for Scientists and Engineers",
+    author:"R.W. Hamming",
+    edition:"Dover Edition",
+    size:"8.1 MB",
+    description:"Classic. Good conceptual explanations of error analysis and convergence.",
+    cover:"",
+    tags:["supp"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- INTEGRAL EQUATIONS ---- */
-  {id:"b-ie-1", topic:"ie", title:"Linear Integral Equations", author:"Ram P. Kanwal", edition:"2nd Ed.", tags:["must"], color:"#4AB4DE",
-   desc:"Fredholm and Volterra integral equations — resolvent kernel, Neumann series. Best book for CSIR Integral Equations section."},
-  {id:"b-ie-2", topic:"ie", title:"Integral Equations", author:"Harry Hochstadt", edition:"Dover Ed.", tags:["rec"], color:"#D4A843",
-   desc:"Compact treatment. Good for symmetric kernels and eigenvalue problems."},
+  {
+    id:"b-ie-1", topic:"ie", subject:"Integral Equations",
+    title:"Linear Integral Equations",
+    author:"Ram P. Kanwal",
+    edition:"2nd Edition",
+    size:"10.8 MB",
+    description:"Fredholm and Volterra integral equations — resolvent kernel, Neumann series. Best book for CSIR Integral Equations section.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-ie-2", topic:"ie", subject:"Integral Equations",
+    title:"Integral Equations",
+    author:"Harry Hochstadt",
+    edition:"Dover Edition",
+    size:"7.3 MB",
+    description:"Compact treatment. Good for symmetric kernels and eigenvalue problems.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
 
   /* ---- CLASSICAL MECHANICS ---- */
-  {id:"b-cm-1", topic:"cm", title:"Classical Mechanics", author:"Herbert Goldstein", edition:"3rd Ed.", tags:["must"], color:"#DE4A4A",
-   desc:"The definitive reference. Lagrangian, Hamiltonian, Poisson brackets, canonical transformations. CSIR Mechanics ka primary text."},
-  {id:"b-cm-2", topic:"cm", title:"Classical Mechanics", author:"N.C. Rana & P.S. Joag", edition:"Latest", tags:["rec"], color:"#D4A843",
-   desc:"Indian text, very aligned to CSIR syllabus. Good solved examples on Lagrangian formulation."},
-  {id:"b-cm-3", topic:"cm", title:"An Introduction to Mechanics", author:"Kleppner & Kolenkow", edition:"2nd Ed.", tags:["supp"], color:"#7A788C",
-   desc:"Conceptual clarity. Good for building physical intuition before Goldstein."},
+  {
+    id:"b-cm-1", topic:"cm", subject:"Classical Mechanics",
+    title:"Classical Mechanics",
+    author:"Herbert Goldstein",
+    edition:"3rd Edition",
+    size:"17.9 MB",
+    description:"The definitive reference. Lagrangian, Hamiltonian, Poisson brackets, canonical transformations. CSIR Mechanics ka primary text.",
+    cover:"",
+    tags:["must"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-cm-2", topic:"cm", subject:"Classical Mechanics",
+    title:"Classical Mechanics",
+    author:"N.C. Rana & P.S. Joag",
+    edition:"Latest Edition",
+    size:"8.2 MB",
+    description:"Indian text, very aligned to CSIR syllabus. Good solved examples on Lagrangian formulation.",
+    cover:"",
+    tags:["rec"],
+    viewLink:"",
+    downloadLink:""
+  },
+  {
+    id:"b-cm-3", topic:"cm", subject:"Classical Mechanics",
+    title:"An Introduction to Mechanics",
+    author:"Kleppner & Kolenkow",
+    edition:"2nd Edition",
+    size:"14.5 MB",
+    description:"Conceptual clarity. Good for building physical intuition before Goldstein.",
+    cover:"",
+    tags:["supp"],
+    viewLink:"",
+    downloadLink:""
+  },
 ];
 
 /* ============================================================
-   BOOKS LIBRARY — STATE (IndexedDB)
+   HANDWRITTEN NOTES DATA
+   (Admin: edit the HANDWRITTEN_NOTES array below)
+   Each object requires:
+     id, topic (la|ra|ca|aa|top|de|calc|ie|na|cm),
+     title, description, viewLink, downloadLink
 ============================================================ */
-let libDB = null;
-const LIB_DB_NAME = 'csir_library';
-const LIB_STORE   = 'pdfs';
-let currentUploadBookId = null;
-let uploadedBooks = {};  // {bookId: {name, size, url}}
+const HANDWRITTEN_NOTES = [
+  /* ---- LINEAR ALGEBRA ---- */
+  {id:"n-la-1", topic:"la", title:"Vector Spaces — Complete Notes", description:"Comprehensive notes on vector spaces, subspaces, basis, dimension, and direct sums. Includes worked examples.", viewLink:"", downloadLink:""},
+  {id:"n-la-2", topic:"la", title:"Linear Transformations & Matrices", description:"Notes covering linear maps, matrix representation, change of basis, and rank–nullity theorem.", viewLink:"", downloadLink:""},
+  {id:"n-la-3", topic:"la", title:"Eigenvalues, Diagonalization & Spectral Theorem", description:"Complete handwritten notes on eigenvalue problems, Cayley–Hamilton, Jordan form, and spectral theorem.", viewLink:"", downloadLink:""},
+  {id:"n-la-4", topic:"la", title:"Inner Product Spaces", description:"Notes on inner products, Gram–Schmidt process, orthonormal bases, and self-adjoint operators.", viewLink:"", downloadLink:""},
 
-function initLibDB(){
-  return new Promise((resolve, reject)=>{
-    const req = indexedDB.open(LIB_DB_NAME, 1);
-    req.onupgradeneeded = e=>{
-      const db = e.target.result;
-      if(!db.objectStoreNames.contains(LIB_STORE)){
-        db.createObjectStore(LIB_STORE, {keyPath:'id'});
-      }
-    };
-    req.onsuccess = e=>{ libDB = e.target.result; resolve(libDB); };
-    req.onerror   = e=>{ reject(e); };
-  });
-}
+  /* ---- REAL ANALYSIS ---- */
+  {id:"n-ra-1", topic:"ra", title:"Sequences & Series", description:"Detailed notes on convergence, Cauchy sequences, series tests — ratio, root, comparison, integral tests.", viewLink:"", downloadLink:""},
+  {id:"n-ra-2", topic:"ra", title:"Continuity & Differentiation", description:"Epsilon–delta continuity, uniform continuity, MVT, Taylor's theorem, and L'Hôpital's rule.", viewLink:"", downloadLink:""},
+  {id:"n-ra-3", topic:"ra", title:"Riemann Integration", description:"Riemann sums, integrability criteria, FTC, improper integrals — complete treatment.", viewLink:"", downloadLink:""},
+  {id:"n-ra-4", topic:"ra", title:"Metric Spaces & Uniform Convergence", description:"Open/closed sets in metric spaces, completeness, compactness, uniform convergence of functions.", viewLink:"", downloadLink:""},
 
-function savePDFtoDB(bookId, file){
-  return new Promise((resolve, reject)=>{
-    const reader = new FileReader();
-    reader.onload = e=>{
-      const tx = libDB.transaction(LIB_STORE,'readwrite');
-      const store = tx.objectStore(LIB_STORE);
-      store.put({id: bookId, name: file.name, size: file.size, data: e.target.result, savedAt: Date.now()});
-      tx.oncomplete = ()=> resolve({name: file.name, size: file.size});
-      tx.onerror    = ()=> reject(tx.error);
-    };
-    reader.readAsDataURL(file);
-  });
-}
+  /* ---- COMPLEX ANALYSIS ---- */
+  {id:"n-ca-1", topic:"ca", title:"Analytic Functions & CR Equations", description:"Cauchy–Riemann equations, harmonic functions, analytic continuation — with full derivations.", viewLink:"", downloadLink:""},
+  {id:"n-ca-2", topic:"ca", title:"Cauchy's Theorem & Integral Formula", description:"Path integrals, Cauchy's theorem, integral formula, and Liouville's theorem.", viewLink:"", downloadLink:""},
+  {id:"n-ca-3", topic:"ca", title:"Laurent Series & Residue Theorem", description:"Laurent expansions, classification of singularities, residue calculations, and contour integration.", viewLink:"", downloadLink:""},
+  {id:"n-ca-4", topic:"ca", title:"Conformal Mapping", description:"Möbius transformations, Schwarz–Christoffel mapping, and applications.", viewLink:"", downloadLink:""},
 
-function getAllPDFs(){
-  return new Promise((resolve, reject)=>{
-    if(!libDB){ resolve({}); return; }
-    const tx = libDB.transaction(LIB_STORE,'readonly');
-    const store = tx.objectStore(LIB_STORE);
-    const req = store.getAll();
-    req.onsuccess = e=>{
-      const map = {};
-      e.target.result.forEach(r=>{ map[r.id] = {name:r.name, size:r.size, data:r.data, savedAt:r.savedAt}; });
-      resolve(map);
-    };
-    req.onerror = ()=> reject(req.error);
-  });
-}
+  /* ---- ABSTRACT ALGEBRA ---- */
+  {id:"n-aa-1", topic:"aa", title:"Group Theory — Fundamentals", description:"Groups, subgroups, cosets, Lagrange's theorem, normal subgroups, and quotient groups.", viewLink:"", downloadLink:""},
+  {id:"n-aa-2", topic:"aa", title:"Sylow Theorems", description:"Complete handwritten notes on Sylow theorems with proofs and applications to classify groups.", viewLink:"", downloadLink:""},
+  {id:"n-aa-3", topic:"aa", title:"Rings, Ideals & Fields", description:"Ring homomorphisms, ideals, quotient rings, PIDs, UFDs, field extensions.", viewLink:"", downloadLink:""},
 
-function deletePDFfromDB(bookId){
-  return new Promise((resolve, reject)=>{
-    const tx = libDB.transaction(LIB_STORE,'readwrite');
-    tx.objectStore(LIB_STORE).delete(bookId);
-    tx.oncomplete = ()=> resolve();
-    tx.onerror    = ()=> reject(tx.error);
-  });
-}
+  /* ---- TOPOLOGY ---- */
+  {id:"n-top-1", topic:"top", title:"Topological Spaces & Basis", description:"Open sets, basis for topology, subspace and product topology, closure and interior.", viewLink:"", downloadLink:""},
+  {id:"n-top-2", topic:"top", title:"Compactness & Connectedness", description:"Compact spaces, Heine–Borel theorem, connected spaces, path connectivity.", viewLink:"", downloadLink:""},
+  {id:"n-top-3", topic:"top", title:"Continuity & Separation Axioms", description:"Continuous maps, homeomorphisms, T₁–T₄ separation axioms, Urysohn's lemma.", viewLink:"", downloadLink:""},
 
-function fmtSize(bytes){
-  if(bytes < 1024*1024) return (bytes/1024).toFixed(1)+' KB';
-  return (bytes/(1024*1024)).toFixed(1)+' MB';
-}
+  /* ---- ODE & PDE ---- */
+  {id:"n-de-1", topic:"de", title:"First & Second Order ODEs", description:"Exact equations, integrating factors, linear ODEs with constant coefficients, variation of parameters.", viewLink:"", downloadLink:""},
+  {id:"n-de-2", topic:"de", title:"Series Solutions & Sturm–Liouville", description:"Frobenius method, Bessel functions, Sturm–Liouville theory and eigenvalue problems.", viewLink:"", downloadLink:""},
+  {id:"n-de-3", topic:"de", title:"Partial Differential Equations", description:"Classification, method of characteristics, separation of variables for wave, heat, and Laplace equations.", viewLink:"", downloadLink:""},
+
+  /* ---- CALCULUS ---- */
+  {id:"n-calc-1", topic:"calc", title:"Multivariable Calculus", description:"Partial derivatives, chain rule, Taylor's theorem in ℝⁿ, maxima/minima, Lagrange multipliers.", viewLink:"", downloadLink:""},
+  {id:"n-calc-2", topic:"calc", title:"Multiple Integrals & Vector Calculus", description:"Double/triple integrals, change of variables, Green's, Stokes', and Divergence theorems.", viewLink:"", downloadLink:""},
+
+  /* ---- INTEGRAL EQUATIONS ---- */
+  {id:"n-ie-1", topic:"ie", title:"Fredholm & Volterra Integral Equations", description:"Classification, resolvent kernel, Neumann series, symmetric kernels and eigenvalue problems.", viewLink:"", downloadLink:""},
+
+  /* ---- NUMERICAL ANALYSIS ---- */
+  {id:"n-na-1", topic:"na", title:"Root Finding & Interpolation", description:"Bisection, Newton–Raphson, secant methods, Newton's forward/backward interpolation, Lagrange formula.", viewLink:"", downloadLink:""},
+  {id:"n-na-2", topic:"na", title:"Numerical Integration & ODEs", description:"Trapezoidal, Simpson's rules, Gaussian quadrature, Euler and Runge–Kutta methods.", viewLink:"", downloadLink:""},
+
+  /* ---- CLASSICAL MECHANICS ---- */
+  {id:"n-cm-1", topic:"cm", title:"Lagrangian Mechanics", description:"Generalised coordinates, Euler–Lagrange equations, constraints, conservation laws.", viewLink:"", downloadLink:""},
+  {id:"n-cm-2", topic:"cm", title:"Hamiltonian Mechanics", description:"Legendre transform, Hamilton's equations, Poisson brackets, canonical transformations.", viewLink:"", downloadLink:""},
+];
 
 /* ============================================================
-   BOOKS LIBRARY — RENDER
+   BOOKS LIBRARY — RENDER (no upload, no storage)
 ============================================================ */
-async function renderBooksPage(){
-  await initLibDB();
-  uploadedBooks = await getAllPDFs();
-  updateStorageBar();
-  filterBooks('all', document.querySelector('.lib-tab.active'));
+const TOPIC_NAMES = {la:'Linear Algebra',ra:'Real Analysis',ca:'Complex Analysis',aa:'Abstract Algebra',de:'ODE & PDE',calc:'Calculus',top:'Topology',na:'Numerical Analysis',ie:'Integral Equations',cm:'Classical Mechanics'};
+const TOPIC_ICONS = {la:'∑',ra:'ℝ',ca:'ℂ',aa:'⊕',de:'∂',calc:'∫',top:'⊂',na:'≈',ie:'∮',cm:'⚙'};
+const TAG_SPINE_COLORS = {la:'#6C63FF',ra:'#E05C6A',ca:'#4CAF82',aa:'#B46EDE',de:'#DE8F4A',calc:'#DE4A9E',top:'#4ADEB4',na:'#ADE04A',ie:'#4AB4DE',cm:'#DE4A4A'};
+
+let currentBookTab = 'all';
+
+function renderBooksPage(){
+  filterBooks('all', document.querySelector('.lib-tab[data-tid="all"]'));
 }
 
-function updateStorageBar(){
-  let totalBytes = 0;
-  Object.values(uploadedBooks).forEach(b=> totalBytes += b.size||0);
-  const mb = totalBytes/(1024*1024);
-  const pct = Math.min(100, mb/100*100); // assume ~100MB soft limit for display
-  document.getElementById('storage-fill').style.width = pct+'%';
-  document.getElementById('storage-pct').textContent = mb.toFixed(1)+' MB';
-}
+function filterBooks(topicId, btn, searchQ){
+  currentBookTab = topicId;
+  const q = (searchQ !== undefined ? searchQ : (document.getElementById('lib-search')||{}).value||'').toLowerCase().trim();
 
-function filterBooks(topicId, btn){
-  document.querySelectorAll('.lib-tab').forEach(t=>t.classList.remove('active'));
-  if(btn) btn.classList.add('active');
+  if(btn){
+    document.querySelectorAll('.lib-tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+  }
 
   let books = BOOKS_DATA;
-  if(topicId === 'uploaded'){
-    books = BOOKS_DATA.filter(b=> uploadedBooks[b.id]);
-  } else if(topicId !== 'all'){
-    books = BOOKS_DATA.filter(b=> b.topic === topicId);
-  }
+  if(topicId !== 'all') books = books.filter(b=> b.topic === topicId);
+  if(q) books = books.filter(b=>
+    b.title.toLowerCase().includes(q) ||
+    b.author.toLowerCase().includes(q) ||
+    b.subject.toLowerCase().includes(q) ||
+    b.description.toLowerCase().includes(q)
+  );
 
   const container = document.getElementById('lib-books-container');
   if(!books.length){
-    container.innerHTML = '<p style="color:var(--ink3);padding:20px 0;">Is topic ke liye koi uploaded PDF nahi hai abhi.</p>';
+    container.innerHTML = '<div class="no-results">📭 No books found matching your search.</div>';
     return;
   }
 
-  // Group by topic when showing all
-  if(topicId === 'all' || topicId === 'uploaded'){
+  if(topicId === 'all' && !q){
+    // Group by topic
     const topicMap = {};
-    books.forEach(b=>{
-      if(!topicMap[b.topic]) topicMap[b.topic] = [];
-      topicMap[b.topic].push(b);
-    });
-    const topicNames = {la:'Linear Algebra',ra:'Real Analysis',ca:'Complex Analysis',aa:'Abstract Algebra',de:'ODE & PDE',calc:'Calculus',top:'Topology',na:'Numerical Analysis',ie:'Integral Equations',cm:'Classical Mechanics'};
+    books.forEach(b=>{ if(!topicMap[b.topic]) topicMap[b.topic] = []; topicMap[b.topic].push(b); });
     let html = '';
     Object.entries(topicMap).forEach(([tid, tbooks])=>{
-      const uploaded = tbooks.filter(b=>uploadedBooks[b.id]).length;
       html += `<div class="lib-section">
         <div class="lib-section-head">
-          <span class="lsh-icon">📖</span>
-          <h3>${topicNames[tid]||tid}</h3>
-          <span class="lsh-count">${tbooks.length} books · ${uploaded} uploaded</span>
+          <span class="lsh-icon">${TOPIC_ICONS[tid]||'📖'}</span>
+          <h3>${TOPIC_NAMES[tid]||tid}</h3>
+          <span class="lsh-count">${tbooks.length} book${tbooks.length>1?'s':''}</span>
         </div>
         <div class="books-grid">${tbooks.map(renderBookCard).join('')}</div>
       </div>`;
     });
     container.innerHTML = html;
   } else {
-    const topicNames = {la:'Linear Algebra',ra:'Real Analysis',ca:'Complex Analysis',aa:'Abstract Algebra',de:'ODE & PDE',calc:'Calculus',top:'Topology',na:'Numerical Analysis',ie:'Integral Equations',cm:'Classical Mechanics'};
-    const uploaded = books.filter(b=>uploadedBooks[b.id]).length;
+    const label = q ? `Search results for "${q}"` : (TOPIC_NAMES[topicId]||topicId);
     container.innerHTML = `<div class="lib-section">
       <div class="lib-section-head">
-        <span class="lsh-icon">📖</span>
-        <h3>${topicNames[topicId]||topicId}</h3>
-        <span class="lsh-count">${books.length} books · ${uploaded} uploaded</span>
+        <span class="lsh-icon">${q?'🔍':(TOPIC_ICONS[topicId]||'📖')}</span>
+        <h3>${label}</h3>
+        <span class="lsh-count">${books.length} book${books.length>1?'s':''}</span>
       </div>
       <div class="books-grid">${books.map(renderBookCard).join('')}</div>
     </div>`;
@@ -1832,179 +2208,125 @@ function filterBooks(topicId, btn){
 }
 
 function renderBookCard(b){
-  const uploaded = uploadedBooks[b.id];
-  const tagHTML = b.tags.map(t=>{
-    const labels = {must:'⭐ Must Read',rec:'✅ Recommended',ref:'📘 Reference',supp:'📄 Supplementary'};
-    return `<span class="book-tag ${t}">${labels[t]||t}</span>`;
-  }).join('');
+  const spineColor = TAG_SPINE_COLORS[b.topic] || 'var(--accent)';
+  const tagLabels = {must:'⭐ Must Read',rec:'✅ Recommended',ref:'📘 Reference',supp:'📄 Supplementary'};
+  const tagsHTML = b.tags.map(t=>`<span class="book-tag ${t}">${tagLabels[t]||t}</span>`).join('');
 
-  const statusHTML = uploaded
-    ? `<span class="book-pdf-status uploaded">✅ PDF Uploaded · ${fmtSize(uploaded.size)}</span>`
-    : `<span class="book-pdf-status missing">📂 No PDF yet</span>`;
+  const coverHTML = b.cover
+    ? `<img src="${b.cover}" alt="${b.title}" loading="lazy">`
+    : `<div class="book-cover-placeholder" style="color:${spineColor}">${TOPIC_ICONS[b.topic]||'📖'}</div>`;
 
-  const actionsHTML = uploaded
-    ? `<div class="book-actions">
-        <button class="book-btn open" onclick="openPDFViewer('${b.id}')">📖 Open</button>
-        <button class="book-btn remove" onclick="removePDF('${b.id}')">🗑</button>
-      </div>`
-    : `<div class="book-actions">
-        <button class="book-btn upload" onclick="openUploadModal('${b.id}')">📤 Upload PDF</button>
-      </div>`;
+  const viewBtn = b.viewLink
+    ? `<a href="${b.viewLink}" target="_blank" rel="noopener" class="book-btn view">📖 View PDF</a>`
+    : `<span class="book-btn disabled">📖 View PDF</span>`;
+
+  const dlBtn = b.downloadLink
+    ? `<a href="${b.downloadLink}" target="_blank" rel="noopener" class="book-btn download">⬇ Download</a>`
+    : `<span class="book-btn disabled">⬇ Download</span>`;
 
   return `<div class="book-card" id="bc-${b.id}">
-    <div class="book-spine" style="background:${b.color};"></div>
-    <div class="book-body">
-      <div class="book-title">${b.title}</div>
-      <div class="book-author">${b.author}</div>
-      <div class="book-meta">
-        ${tagHTML}
-        <span class="book-tag ref">${b.edition}</span>
+    <div style="height:5px;background:${spineColor};"></div>
+    <div class="book-card-top">
+      <div class="book-cover-wrap">${coverHTML}</div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.author}</div>
+        <div class="book-desc">${b.description}</div>
+        <div class="book-tags">${tagsHTML}</div>
       </div>
-      <div class="book-desc">${b.desc}</div>
     </div>
-    <div class="book-footer">
-      ${statusHTML}
-      ${actionsHTML}
+    <div class="book-meta-row">
+      <span class="book-meta-chip">📚 ${b.subject}</span>
+      <span class="book-meta-chip">🔖 ${b.edition}</span>
+      <span class="book-meta-chip">📦 ${b.size}</span>
     </div>
+    <div class="book-footer">${viewBtn}${dlBtn}</div>
   </div>`;
 }
 
 /* ============================================================
-   UPLOAD MODAL
+   HANDWRITTEN NOTES — RENDER
 ============================================================ */
-function openUploadModal(bookId){
-  currentUploadBookId = bookId;
-  const b = BOOKS_DATA.find(x=>x.id===bookId);
-  if(!b) return;
-  document.getElementById('um-book-title').textContent = b.title;
-  document.getElementById('um-book-author').textContent = b.author + ' · ' + b.edition;
-  document.getElementById('um-progress').style.display='none';
-  document.getElementById('um-progress-fill').style.width='0%';
-  document.getElementById('um-dropzone').classList.remove('drag');
-  document.getElementById('lib-file-input').value='';
-  document.getElementById('upload-modal').classList.add('open');
+const NOTES_TOPIC_NAMES = {...TOPIC_NAMES};
+let currentNotesTab = 'all';
+
+function renderNotesPage(){
+  filterNotes('all', document.querySelector('.notes-tab[data-ntid="all"]'));
 }
 
-function closeUploadModal(){
-  document.getElementById('upload-modal').classList.remove('open');
-  currentUploadBookId = null;
-}
+function filterNotes(topicId, btn, searchQ){
+  currentNotesTab = topicId;
+  const q = (searchQ !== undefined ? searchQ : (document.getElementById('notes-search')||{}).value||'').toLowerCase().trim();
 
-function handleFileDrop(event){
-  event.preventDefault();
-  document.getElementById('um-dropzone').classList.remove('drag');
-  const file = event.dataTransfer.files[0];
-  if(file) processUploadFile(file);
-}
+  if(btn){
+    document.querySelectorAll('.notes-tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+  }
 
-function handleFileSelect(event){
-  const file = event.target.files[0];
-  if(file) processUploadFile(file);
-}
+  let notes = HANDWRITTEN_NOTES;
+  if(topicId !== 'all') notes = notes.filter(n=> n.topic === topicId);
+  if(q) notes = notes.filter(n=>
+    n.title.toLowerCase().includes(q) ||
+    (NOTES_TOPIC_NAMES[n.topic]||'').toLowerCase().includes(q) ||
+    n.description.toLowerCase().includes(q)
+  );
 
-async function processUploadFile(file){
-  if(!file.type.includes('pdf') && !file.name.endsWith('.pdf')){
-    alert('Sirf PDF files upload ho sakti hain!');
+  const container = document.getElementById('notes-container');
+  if(!notes.length){
+    container.innerHTML = '<div class="no-results">📭 No notes found matching your search.</div>';
     return;
   }
-  if(file.size > 50 * 1024 * 1024){
-    alert('File size 50 MB se zyada nahi honi chahiye.');
-    return;
-  }
-  const prog = document.getElementById('um-progress');
-  const fill = document.getElementById('um-progress-fill');
-  const txt  = document.getElementById('um-progress-text');
-  prog.style.display='block';
-  txt.textContent = `Saving "${file.name}"...`;
 
-  // Simulate progress
-  let pct=0;
-  const interval = setInterval(()=>{pct=Math.min(pct+10,90);fill.style.width=pct+'%';},100);
-
-  try{
-    const saved = await savePDFtoDB(currentUploadBookId, file);
-    clearInterval(interval);
-    fill.style.width='100%';
-    txt.textContent='✅ Successfully saved!';
-    uploadedBooks[currentUploadBookId] = {name:saved.name, size:saved.size};
-    updateStorageBar();
-    setTimeout(()=>{
-      closeUploadModal();
-      // re-render active tab
-      const activeTab = document.querySelector('.lib-tab.active');
-      filterBooks(activeTab?activeTab.getAttribute('data-tid')||'all':'all', activeTab);
-    }, 800);
-  } catch(err){
-    clearInterval(interval);
-    fill.style.width='0%';
-    txt.textContent='❌ Error: '+err.message;
+  if(topicId === 'all' && !q){
+    // Group by topic
+    const topicMap = {};
+    notes.forEach(n=>{ if(!topicMap[n.topic]) topicMap[n.topic] = []; topicMap[n.topic].push(n); });
+    let html = '';
+    Object.entries(topicMap).forEach(([tid, tnotes])=>{
+      html += `<div class="notes-section">
+        <div class="notes-section-head">
+          <span style="font-size:1.2rem">${TOPIC_ICONS[tid]||'📝'}</span>
+          <h3>${NOTES_TOPIC_NAMES[tid]||tid}</h3>
+          <span class="nsh-count">${tnotes.length} note${tnotes.length>1?'s':''}</span>
+        </div>
+        <div class="notes-grid">${tnotes.map(renderNoteCard).join('')}</div>
+      </div>`;
+    });
+    container.innerHTML = html;
+  } else {
+    const label = q ? `Search results for "${q}"` : (NOTES_TOPIC_NAMES[topicId]||topicId);
+    container.innerHTML = `<div class="notes-section">
+      <div class="notes-section-head">
+        <span style="font-size:1.2rem">${q?'🔍':(TOPIC_ICONS[topicId]||'📝')}</span>
+        <h3>${label}</h3>
+        <span class="nsh-count">${notes.length} note${notes.length>1?'s':''}</span>
+      </div>
+      <div class="notes-grid">${notes.map(renderNoteCard).join('')}</div>
+    </div>`;
   }
 }
 
-/* ============================================================
-   PDF VIEWER
-============================================================ */
-async function openPDFViewer(bookId){
-  const b = BOOKS_DATA.find(x=>x.id===bookId);
-  if(!b) return;
-  const record = uploadedBooks[bookId];
-  if(!record){
-    // fetch fresh from DB
-    const tx = libDB.transaction(LIB_STORE,'readonly');
-    const req = tx.objectStore(LIB_STORE).get(bookId);
-    req.onsuccess = e=>{
-      if(e.target.result){
-        uploadedBooks[bookId] = e.target.result;
-        _openViewer(b, e.target.result.data);
-      }
-    };
-    return;
-  }
-  // get full data from DB (uploadedBooks stores only meta)
-  const tx = libDB.transaction(LIB_STORE,'readonly');
-  const req = tx.objectStore(LIB_STORE).get(bookId);
-  req.onsuccess = e=>{
-    if(e.target.result){
-      _openViewer(b, e.target.result.data);
-    }
-  };
-}
+function renderNoteCard(n){
+  const topicName = NOTES_TOPIC_NAMES[n.topic] || n.topic;
 
-function _openViewer(b, dataURL){
-  document.getElementById('pdf-modal-title').textContent = `📖 ${b.title} — ${b.author}`;
-  document.getElementById('pdf-frame').src = dataURL;
-  document.getElementById('pdf-modal').classList.add('open');
-}
+  const viewBtn = n.viewLink
+    ? `<a href="${n.viewLink}" target="_blank" rel="noopener" class="note-btn view">📖 View Notes</a>`
+    : `<span class="note-btn disabled">📖 View Notes</span>`;
 
-function closePDFViewer(){
-  document.getElementById('pdf-modal').classList.remove('open');
-  document.getElementById('pdf-frame').src='';
-}
+  const dlBtn = n.downloadLink
+    ? `<a href="${n.downloadLink}" target="_blank" rel="noopener" class="note-btn download">⬇ Download PDF</a>`
+    : `<span class="note-btn disabled">⬇ Download PDF</span>`;
 
-async function removePDF(bookId){
-  const b = BOOKS_DATA.find(x=>x.id===bookId);
-  if(!b) return;
-  if(!confirm(`"${b.title}" ka PDF delete karna chahte ho?`)) return;
-  await deletePDFfromDB(bookId);
-  delete uploadedBooks[bookId];
-  updateStorageBar();
-  const activeTab = document.querySelector('.lib-tab.active');
-  const tid = activeTab ? (activeTab.textContent.includes('All')?'all':activeTab.getAttribute('data-tid')||'all') : 'all';
-  filterBooks(tid, activeTab);
+  return `<div class="note-card" id="nc-${n.id}">
+    <div class="note-card-accent"></div>
+    <div class="note-card-body">
+      <div class="note-topic-badge">${topicName}</div>
+      <div class="note-title">${n.title}</div>
+      <div class="note-desc">${n.description}</div>
+    </div>
+    <div class="note-card-footer">${viewBtn}${dlBtn}</div>
+  </div>`;
 }
-
-// Assign data-tid to filter tabs after render
-document.addEventListener('DOMContentLoaded', ()=>{
-  const tabMap = {
-    'Linear Algebra':'la','Real Analysis':'ra','Complex Analysis':'ca','Abstract Algebra':'aa',
-    'ODE / PDE':'de','Calculus':'calc','Topology':'top','Numerical':'na','Integral Eq.':'ie','Mechanics':'cm','✅ Uploaded':'uploaded','📖 All Books':'all'
-  };
-  document.querySelectorAll('.lib-tab').forEach(tab=>{
-    const txt = tab.textContent.trim();
-    const tid = tabMap[txt] || 'all';
-    tab.setAttribute('data-tid', tid);
-  });
-});
 
 /* ============================================================
    KATEX RENDER
