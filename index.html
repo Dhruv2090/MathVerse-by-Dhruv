@@ -576,6 +576,7 @@ body.light{
       <!-- Topic filter tabs -->
       <div class="notes-topic-tabs" id="notes-topic-tabs">
         <span class="notes-tab active" data-ntid="all" onclick="filterNotes('all',this)">📝 All Notes</span>
+        <span class="notes-tab" data-ntid="ma" onclick="filterNotes('ma',this)">Mathematical Aptitude</span>
         <span class="notes-tab" data-ntid="la" onclick="filterNotes('la',this)">Linear Algebra</span>
         <span class="notes-tab" data-ntid="ra" onclick="filterNotes('ra',this)">Real Analysis</span>
         <span class="notes-tab" data-ntid="ca" onclick="filterNotes('ca',this)">Complex Analysis</span>
@@ -2090,7 +2091,7 @@ const BOOKS_DATA = [
 ============================================================ */
 const HANDWRITTEN_NOTES = [
   /* ---- PART A ---- */
-  {id:"n-la-1", topic:"la", title:"Mathematical Aptitude & Reasoning", description:"Mathematical Aptitude & Reasoning. Includes worked examples.", viewLink:"https://1drv.ms/b/c/5ecf8d36de9b9a86/IQCGmpveNo3PIIBekBAAAAAAASQCVTduCCBfkSSuxSfaHm8?e=TaUPMj", downloadLink:"https://1drv.ms/b/c/5ecf8d36de9b9a86/IQCGmpveNo3PIIBekBAAAAAAASQCVTduCCBfkSSuxSfaHm8?e=NemXXP"},
+  {id:"n-ma-1", topic:"ma", title:"Mathematical Aptitude & Reasoning", description:"Mathematical Aptitude & Reasoning. Includes worked examples.", viewLink:"https://1drv.ms/b/c/5ecf8d36de9b9a86/IQCGmpveNo3PIIBekBAAAAAAASQCVTduCCBfkSSuxSfaHm8?e=TaUPMj", downloadLink:"https://1drv.ms/b/c/5ecf8d36de9b9a86/IQCGmpveNo3PIIBekBAAAAAAASQCVTduCCBfkSSuxSfaHm8?e=NemXXP"},
   /* ---- LINEAR ALGEBRA ---- */
   {id:"n-la-1", topic:"la", title:"Vector Spaces — Complete Notes", description:"Comprehensive notes on vector spaces, subspaces, basis, dimension, and direct sums. Includes worked examples.", viewLink:"", downloadLink:""},
   {id:"n-la-2", topic:"la", title:"Linear Transformations & Matrices", description:"Notes covering linear maps, matrix representation, change of basis, and rank–nullity theorem.", viewLink:"", downloadLink:""},
@@ -2143,8 +2144,8 @@ const HANDWRITTEN_NOTES = [
 /* ============================================================
    BOOKS LIBRARY — RENDER (no upload, no storage)
 ============================================================ */
-const TOPIC_NAMES = {la:'Linear Algebra',ra:'Real Analysis',ca:'Complex Analysis',aa:'Abstract Algebra',de:'ODE & PDE',calc:'Calculus',top:'Topology',na:'Numerical Analysis',ie:'Integral Equations',cm:'Classical Mechanics'};
-const TOPIC_ICONS = {la:'∑',ra:'ℝ',ca:'ℂ',aa:'⊕',de:'∂',calc:'∫',top:'⊂',na:'≈',ie:'∮',cm:'⚙'};
+const TOPIC_NAMES = {la:'Linear Algebra',ra:'Real Analysis',ca:'Complex Analysis',aa:'Abstract Algebra',de:'ODE & PDE',calc:'Calculus',top:'Topology',na:'Numerical Analysis',ie:'Integral Equations',cm:'Classical Mechanics',ma:'Mathematical Aptitude'};
+const TOPIC_ICONS = {la:'∑',ra:'ℝ',ca:'ℂ',aa:'⊕',de:'∂',calc:'∫',top:'⊂',na:'≈',ie:'∮',cm:'⚙',ma:'🧠'};
 const TAG_SPINE_COLORS = {la:'#6C63FF',ra:'#E05C6A',ca:'#4CAF82',aa:'#B46EDE',de:'#DE8F4A',calc:'#DE4A9E',top:'#4ADEB4',na:'#ADE04A',ie:'#4AB4DE',cm:'#DE4A4A'};
 
 let currentBookTab = 'all';
