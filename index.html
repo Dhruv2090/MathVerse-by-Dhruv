@@ -51,8 +51,7 @@ a{color:var(--accent);text-decoration:none;}
 #search-box:focus{border-color:var(--accent);width:260px;transition:width .2s;}
 .topbar-btn{background:none;border:1px solid var(--border2);color:var(--ink2);border-radius:6px;padding:6px 12px;font-size:.78rem;cursor:pointer;white-space:nowrap;}
 .topbar-btn:hover{border-color:var(--accent);color:var(--accent);}
-#back-btn{display:none;align-items:center;gap:6px;background:var(--bg3);border-color:var(--accent);color:var(--accent);font-weight:600;}
-#back-btn:hover{background:var(--accent);color:#fff;}
+#back-btn{display:none;}
 #theme-btn{font-size:16px;}
 
 /* ===== SIDEBAR ===== */
@@ -395,7 +394,7 @@ body.light{
   <div id="topbar">
     <div class="topbar-left">
       <button id="menu-btn" onclick="toggleSidebar()">☰</button>
-      <button class="topbar-btn" id="back-btn" onclick="goBack()" title="Go back">← Back</button>
+      <button class="topbar-btn" id="back-btn" onclick="goBack()">← Back</button>
       <span id="breadcrumb">home</span>
     </div>
     <div class="topbar-right">
@@ -1250,17 +1249,15 @@ function updateActiveSb(tid){
 
 function updateBackButton(){
   const btn=document.getElementById('back-btn');
-  const hasDeepView = !!(window.history.state || window.location.hash);
-  const isHomeView = !hasDeepView || window.location.hash === '' || window.location.hash === '#page-home' || window.location.hash === '#home';
-  btn.style.display = isHomeView ? 'none' : 'inline-flex';
+  if(window.history.state || window.location.hash){
+    btn.style.display='inline-flex';
+  } else {
+    btn.style.display='none';
+  }
 }
 
 function goBack(){
-  if(window.history.length > 1){
-    window.history.back();
-  } else {
-    showPage('home', true);
-  }
+  window.history.back();
 }
 
 window.addEventListener('popstate', event=>{
@@ -2092,6 +2089,8 @@ const BOOKS_DATA = [
      title, description, viewLink, downloadLink
 ============================================================ */
 const HANDWRITTEN_NOTES = [
+  /* ---- PART A ---- */
+  {id:"n-la-1", topic:"la", title:"Mathematical Aptitude & Reasoning", description:"Mathematical Aptitude & Reasoning. Includes worked examples.", viewLink:"https://1drv.ms/b/c/5ecf8d36de9b9a86/IQCGmpveNo3PIIBekBAAAAAAASQCVTduCCBfkSSuxSfaHm8?e=TaUPMj", downloadLink:"https://1drv.ms/b/c/5ecf8d36de9b9a86/IQCGmpveNo3PIIBekBAAAAAAASQCVTduCCBfkSSuxSfaHm8?e=NemXXP"},
   /* ---- LINEAR ALGEBRA ---- */
   {id:"n-la-1", topic:"la", title:"Vector Spaces — Complete Notes", description:"Comprehensive notes on vector spaces, subspaces, basis, dimension, and direct sums. Includes worked examples.", viewLink:"", downloadLink:""},
   {id:"n-la-2", topic:"la", title:"Linear Transformations & Matrices", description:"Notes covering linear maps, matrix representation, change of basis, and rank–nullity theorem.", viewLink:"", downloadLink:""},
